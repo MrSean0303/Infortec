@@ -22,22 +22,22 @@ class m191113_164827_create_produto_table extends Migration
         $this->createTable('{{%produto}}', [
             'idProduto' => $this->primaryKey(),
             'nome' =>$this->string()->notNull(),
-            'fotoProduto' => $this->binary(),
+            'fotoProduto' => 'LONGBLOB',
             'descricao' => $this->text()->notNull(),
-            'preco' => $this->money(2)->notNull(),
+            'preco' => $this->money(.2)->notNull(),
             'quantStock' => $this->integer()->notNull(),
-            'valorDesconto' => $this->money(2),
+            'valorDesconto' => $this->money(.2),
             'pontos' => $this->integer(),
             'subCategoria_id' => $this->integer()->notNull(),
             'iva_id' => $this->integer(),
         ],$tableOptions);
 
         $this->addForeignKey(
-            'fk-Produto_Categoria',
+            'fk-Produto_subCategoria',
             'produto',
             'subCategoria_id',
-            'categoria',
-            'idCategoria',
+            'subCategoria',
+            'idsubCategoria',
             'CASCADE'
         );
 

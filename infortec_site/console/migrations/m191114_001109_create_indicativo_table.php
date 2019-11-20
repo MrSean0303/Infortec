@@ -20,7 +20,7 @@ class m191114_001109_create_indicativo_table extends Migration
 
         $this->createTable('{{%indicativo}}', [
             'idIndicativo' => $this->primaryKey(),
-            'icon' => $this->binary(),
+            'icon' => 'LONGBLOB',
             'pais' => $this->string()->notNull()->unique(),
             'indicativo' => $this->string()->notNull()->unique(),
         ], $tableOptions);
