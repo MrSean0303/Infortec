@@ -2,52 +2,57 @@
 
 /* @var $this yii\web\View */
 
+use common\models\Produto;
+use phpDocumentor\Reflection\Types\Null_;
+use yii\bootstrap\ActiveForm;
+
+$prs = Produto::find()->indexBy('idProduto')->all();
+
+/*
+$image = imagecreatefromstring($prs[1]->fotoProduto);
+ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
+imagejpeg($image, null, 80);
+$data = ob_get_contents();
+ob_end_clean();
+echo '<img src="data:image/jpg;base64,' .  base64_encode($data)  . '" />';*/
+
+
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
+    <?php
+    if($prs != null) {
+        ?>
 
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+            <?php
+            for ($i = 1; $i <= count($prs); $i++) {
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+                ?>
+                <div class="col-md-4">
+                    <?php
+                    $image = imagecreatefromstring($prs[$i]->fotoProduto);
+                    ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
+                    imagejpeg($image, null, 80);
+                    $data = ob_get_contents();
+                    ob_end_clean();
+                    echo '<img src="data:image/jpg;base64,' . base64_encode($data) . '" height="150" width="150" />';
+                    echo '<br>';
+                    echo $prs[$i]->nome;
+                    echo '<br>';
+                    echo $prs[$i]->preco, '€';
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                    ?>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+                </div>
+                <?php
+            }
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+            ?>
         </div>
-
-    </div>
+        <?php
+    }
+    ?>
 </div>
