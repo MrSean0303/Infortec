@@ -55,4 +55,5 @@ $this->title = 'My Yii Application';
         <?php
     }
     ?>
+
 </div>

@@ -17,7 +17,6 @@ class SignupForm extends Model
     public $nif;
     public $morada;
     public $password;
-    public $user_temp;
 
     /**
      * {@inheritdoc}
