@@ -22,7 +22,7 @@ class m191114_000106_create_linhaVenda_table extends Migration
             'idlinhaVenda' => $this->primaryKey(),
             'quantidade' => $this->integer()->notNull(),
             'isPontos' => $this->boolean(),
-            'preco' => $this->money(.2)->notNull(),
+            'preco' => $this->decimal(10,2)->notNull(),
             'venda_id' => $this->integer()->notNull(),
             'produto_id' => $this->integer()->notNull(),
         ], $tableOptions);
