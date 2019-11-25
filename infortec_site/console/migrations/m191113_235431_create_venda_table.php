@@ -21,8 +21,8 @@ class m191113_235431_create_venda_table extends Migration
         $this->createTable('{{%venda}}', [
             'idVenda' => $this->primaryKey(),
             'totalVenda' => $this->money(.2)->notNull(),
-            'data' => $this->dateTime(),
-            'utilizador_id' => $this->integer(),
+            'data' => $this->dateTime()->notNull(),
+            'utilizador_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
         $this->addForeignKey(

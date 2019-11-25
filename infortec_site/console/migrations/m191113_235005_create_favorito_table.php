@@ -20,8 +20,8 @@ class m191113_235005_create_favorito_table extends Migration
 
         $this->createTable('{{%favorito}}', [
             'idFavorito' => $this->primaryKey(),
-            'produto_id' => $this->integer(),
-            'utilizador_id' => $this->integer(),
+            'produto_id' => $this->integer()->notNull(),
+            'utilizador_id' => $this->integer()->notNull(),
         ],$tableOptions);
 
         $this->addForeignKey(
