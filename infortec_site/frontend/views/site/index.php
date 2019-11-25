@@ -23,9 +23,9 @@ $this->title = 'My Yii Application';
 
         <div class="allCards">
         <?php
-        for($i = 1; $i<= count($prs); $i++) {
-            if ($prs[$i]->fotoProduto != null){
-                $image = imagecreatefromstring($prs[$i]->fotoProduto);
+        foreach ($prs as $produtos) {
+            if ($produtos->fotoProduto != null){
+                $image = imagecreatefromstring($produtos->fotoProduto);
                 ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
                 imagejpeg($image, null, 80);
                 $data = ob_get_contents();
@@ -33,14 +33,16 @@ $this->title = 'My Yii Application';
                 }else{
                 $data = 0;
             }
+            $preco = number_format($produtos->preco, 2, ',', ' ')
             ?>
 
             <div class="card" style="width:24%;">
                  <img class="card-img-top" <?= 'src="data:image/jpg;base64,' .  base64_encode($data). '"'?> alt="Card image cap">
                 <div class="card-body">
-                    <h4 class="card-title"><?= $prs[$i]->nome?></h4>
-                    <h5 class="card-subtitle mb-2 text-muted"><?= $prs[$i]->preco .'€' ?></h5>
-                    <p class="card-text"><?= $prs[$i]->descricao?></p>
+                    <h4 class="card-title"><?= $produtos->nome?></h4>
+
+                    <h4 class="card-subtitle mb-2 text-muted"><?= $preco?></h4>
+                    <p class="card-text"><?= $produtos->descricao?></p>
                 </div>
             </div>
         <?php } ?>
