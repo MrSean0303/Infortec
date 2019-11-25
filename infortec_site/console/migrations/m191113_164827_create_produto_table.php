@@ -24,6 +24,7 @@ class m191113_164827_create_produto_table extends Migration
             'nome' =>$this->string()->notNull(),
             'fotoProduto' => 'LONGBLOB',
             'descricao' => $this->text()->notNull(),
+            'descricaoGeral' => $this->text()->notNull(),
             'preco' => $this->money(.2)->notNull(),
             'quantStock' => $this->integer()->notNull(),
             'valorDesconto' => $this->money(.2),
