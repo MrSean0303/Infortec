@@ -21,50 +21,26 @@ $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
-    <?php
-    if($prs != null) {
-        ?>
-
-        <div class="row">
-
-            <?php
-            for ($i = 1; $i <= count($prs); $i++) {
-
-                ?>
-                <div class="col-md-4">
-                    <?php
-                    $image = imagecreatefromstring($prs[$i]->fotoProduto);
-                    ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
-                    imagejpeg($image, null, 80);
-                    $data = ob_get_contents();
-                    ob_end_clean();
-                    echo '<img src="data:image/jpg;base64,' . base64_encode($data) . '" height="150" width="150" />';
-                    echo '<br>';
-                    echo $prs[$i]->nome;
-                    echo '<br>';
-                    echo $prs[$i]->preco, '€';
-
-                    ?>
-
-                </div>
-                <?php
-            }
-
-            ?>
-        </div>
-        <?php
-    }
-    ?>
         <div class="allCards">
         <?php
-        $num = 30;
-        for($i = 0; $i<$num; $i++)
-        {?>
+        for($i = 1; $i<= count($prs); $i++) {
+            if ($prs[$i]->fotoProduto != null){
+                $image = imagecreatefromstring($prs[$i]->fotoProduto);
+                ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
+                imagejpeg($image, null, 80);
+                $data = ob_get_contents();
+                ob_end_clean();
+                }else{
+                $data = 0;
+            }
+            ?>
+
             <div class="card" style="width:24%;">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                 <img class="card-img-top" <?= 'src="data:image/jpg;base64,' .  base64_encode($data). '"'?> alt="Card image cap">
                 <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h4 class="card-title"><?= $prs[$i]->nome?></h4>
+                    <h5 class="card-subtitle mb-2 text-muted"><?= $prs[$i]->preco .'€' ?></h5>
+                    <p class="card-text"><?= $prs[$i]->descricao?></p>
                 </div>
             </div>
         <?php } ?>
