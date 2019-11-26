@@ -10,7 +10,7 @@ use Yii;
  * @property int $idCategoria
  * @property string $nome
  *
- * @property Produto[] $produtos
+ * @property Produto[] $produto
  * @property Subcategoria[] $subcategorias
  */
 class Categoria extends \yii\db\ActiveRecord
