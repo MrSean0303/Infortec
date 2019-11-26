@@ -75,7 +75,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $produtos = Produto::find()->indexBy('idProduto')->all();
+        return $this->render('index', ['prod' => $produtos]);
     }
 
     /**
