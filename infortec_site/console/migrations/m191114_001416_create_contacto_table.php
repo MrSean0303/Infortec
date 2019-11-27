@@ -20,9 +20,9 @@ class m191114_001416_create_contacto_table extends Migration
 
         $this->createTable('{{%contacto}}', [
             'idContacto' => $this->primaryKey(),
-            'numero' => $this->integer(),
-            'utilizador_id' => $this->integer(),
-            'indicativo_id' => $this->integer(),
+            'numero' => $this->integer()->notNull(),
+            'utilizador_id' => $this->integer()->notNull(),
+            'indicativo_id' => $this->integer()->notNull(),
         ], $tableOptions);
 
         $this->addForeignKey(
