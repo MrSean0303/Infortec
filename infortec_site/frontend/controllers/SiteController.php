@@ -136,6 +136,11 @@ class SiteController extends Controller
         }
     }
 
+    public function actionSearchproducts(){
+
+        return $this->render('about');
+    }
+
     /**
      * Displays about page.
      *

@@ -9,6 +9,9 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\widgets\ActiveForm;
+use yii\helpers\Url;
+use yii\bootstrap\ButtonDropdown;
 
 AppAsset::register($this);
 ?>
@@ -39,6 +42,7 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
+
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
@@ -53,13 +57,23 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
     }
+
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-nav navbar-left'],
         'items' => $menuItems,
     ]);
+
+    $controllerl = Yii::$app->controller;
+    $homecheker = $controllerl->id.'/'.$controllerl->action->id;
+    if($homecheker=='site/index')
+    {
+        echo '<form class="form-inline my-2 my-lg-0" style="float: right !important; padding: 10px !important;" action="'. Url::toRoute("searchproducts") .'">';
+        echo '<input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" onfocus="this.placeholder = \'\'" onblur="this.placeholder = \'Pesquisar\'" onmouseover="this.style.transition=\'0.5s\', this.style.width=\'300px \'" onmouseout="this.style.transition=\'0.5s\', this.style.width=\'200px\'" style ="width: 200px !important;">';
+        echo '</form>';
+    }
+
     NavBar::end();
     ?>
-
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
