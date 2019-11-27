@@ -1,35 +1,56 @@
 <?php
 
+use frontend\controllers\ProdutoController;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Produto */
+/* @var $prod ProdutoController*/
 
-$this->title = $model->idProduto;
-$this->params['breadcrumbs'][] = ['label' => 'Produtos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+$this->title = $prod->nome;
+
+
+    if ($prod->fotoProduto != null){
+    $image = imagecreatefromstring($prod->fotoProduto);
+    ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
+    imagejpeg($image, null, 80);
+    $data = ob_get_contents();
+    ob_end_clean();
+    }else {
+        $data = 0;
+    }
+
+
+
 ?>
+
 <div class="produto-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'idProduto',
-            'nome',
-            'fotoProduto',
-            'descricao:ntext',
-            'descricaoGeral:ntext',
-            'preco',
-            'quantStock',
-            'valorDesconto',
-            'pontos',
-            'subCategoria_id',
-            'iva_id',
-        ],
-    ]) ?>
+    <div style="width: 100%">
+
+        <div>
+            <img class="card-img-top" src=<?="data:image/jpg;base64,".  base64_encode($data)?> alt="No image">
+            <div>
+                <div>
+                    <h1><?=$prod->nome?></h1>
+                </div>
+                <div style="text-align: right">
+                    <h4><?=$prod->preco . "€"?></h4>
+                </div>
+                <div >
+                    <p></p>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
 
 </div>
