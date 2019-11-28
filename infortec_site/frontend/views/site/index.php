@@ -1,24 +1,21 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $prod SiteController*/
+
 
 use common\models\Produto;
 use frontend\controllers\SiteController;
 use phpDocumentor\Reflection\Types\Null_;
 use yii\helpers\Html;
 
-/*
-$image = imagecreatefromstring($prs[1]->fotoProduto);
-ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
-imagejpeg($image, null, 80);
-$data = ob_get_contents();
-ob_end_clean();
-echo '<img src="data:image/jpg;base64,' .  base64_encode($data)  . '" />';*/
 
+$prs = $prod;
 
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
+
 
         <div class="allCards">
         <?php
@@ -31,18 +28,18 @@ $this->title = 'My Yii Application';
                 ob_end_clean();
                 }else{
                 $data = 0;
-            }
-            $preco = number_format($produtos->preco, 2, ',', ' ')
-            ?>
 
+            }
+            $preco = number_format($produtos->preco, 2, ',', ' ');
+            ?>
             <div class="card" style="width:24%;">
-                <?= Html::a('
+            <?= Html::a('
 
                      <img class="card-img-top" src="data:image/jpg;base64,' .  base64_encode($data). '" alt="Card image cap">
                     <div class="card-body">
                         <h4 class="card-title">'. $produtos->nome . '</h4>
                         <h4 class="card-subtitle mb-2 text-muted">'. $preco .'</h4>
-                        <p class="card-text">'. $produtos->descricaoGeral .'</p>
+                        <p class="card-text">'. $produtos->descricao .'</p>
                     </div>
 
                 ', [ 'produto/view', 'id' => $produtos->idProduto])
@@ -53,4 +50,5 @@ $this->title = 'My Yii Application';
             <?php
         } ?>
         </div>
+
 </div>

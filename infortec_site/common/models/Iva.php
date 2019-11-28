@@ -10,7 +10,7 @@ use Yii;
  * @property int $idIva
  * @property int $valorIva
  *
- * @property Produto[] $produtos
+ * @property Produto[] $produto
  */
 class Iva extends \yii\db\ActiveRecord
 {
