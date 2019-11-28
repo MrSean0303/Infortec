@@ -99,4 +99,15 @@ class Produto extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Iva::className(), ['idIva' => 'iva_id']);
     }
+
+
+    public function searchProductByName()
+    {
+        if ($this->validate()) {
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+        }
+
+        return false;
+    }
+
 }

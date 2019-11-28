@@ -19,7 +19,7 @@ $this->title = 'My Yii Application';
 
         <div class="allCards">
         <?php
-        foreach ($prs as $produtos) {
+        foreach ($products as $produtos) {
             if ($produtos->fotoProduto != null){
                 $image = imagecreatefromstring($produtos->fotoProduto);
                 ob_start(); //You could also just output the $image via header() and bypass this buffer capture.

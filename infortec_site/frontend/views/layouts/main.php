@@ -57,6 +57,17 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
+
+    $controllerl = Yii::$app->controller;
+    $homecheker = $controllerl->id.'/'.$controllerl->action->id;
+
+    if($homecheker=='site/index' || $homecheker=='site/searchproducts')
+    {
+        echo '<form class="form-inline my-2 my-lg-0" style="float: right !important; padding: 10px !important;" action="'. Url::toRoute("searchproducts") .'">';
+        echo '<input class="form-control mr-sm-2" name="pesquisa" type="search" placeholder="Pesquisar" aria-label="Search" onfocus="this.placeholder = \'\'" onblur="this.placeholder = \'Pesquisar\'" onmouseover="this.style.transition=\'0.5s\', this.style.width=\'300px \'" onmouseout="this.style.transition=\'0.5s\', this.style.width=\'200px\'" style ="width: 200px !important;">';
+        echo '</form>';
+    }
+
     NavBar::end();
     ?>
 
