@@ -22,6 +22,20 @@ class m191113_164611_create_iva_table extends Migration
             'idIva' => $this->primaryKey(),
             'valorIva' => $this->integer()->notNull()->unique(),
         ], $tableOptions);
+
+        //Inserir na base de dados
+        $this->insert('iva',[
+            'idIva' => 1,
+            'valorIva' => 23,
+            ]);
+        $this->insert('iva',[
+            'idIva' => 2,
+            'valorIva' => 22,
+        ]);
+        $this->insert('iva',[
+            'idIva' => 3,
+            'valorIva' => 18,
+        ]);
     }
 
     /**
