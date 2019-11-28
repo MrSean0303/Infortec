@@ -99,4 +99,5 @@ class Produto extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Iva::className(), ['idIva' => 'iva_id']);
     }
+
 }

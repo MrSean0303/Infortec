@@ -141,7 +141,7 @@ a.desc:after {
     box-shadow: 0 0px 1px 0 rgba(0,0,0,0.3);
     transition: 0.3s;
 
-    text-align: center;
+    text-align: center !important;
 }
 
 .card:hover {
@@ -160,4 +160,8 @@ a.desc:after {
 .card-subtitle{
     text-align: right;
     color: black;
+}
+
+.preco{
+    text-align: center !important;
 }

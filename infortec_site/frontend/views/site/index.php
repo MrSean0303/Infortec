@@ -3,10 +3,9 @@
 /* @var $this yii\web\View */
 
 use common\models\Produto;
+use frontend\controllers\SiteController;
 use phpDocumentor\Reflection\Types\Null_;
-use yii\bootstrap\ActiveForm;
-
-$prs = Produto::find()->indexBy('idProduto')->all();
+use yii\helpers\Html;
 
 /*
 $image = imagecreatefromstring($prs[1]->fotoProduto);
@@ -23,7 +22,7 @@ $this->title = 'My Yii Application';
 
         <div class="allCards">
         <?php
-        foreach ($prs as $produtos) {
+        foreach ($products as $produtos) {
             if ($produtos->fotoProduto != null){
                 $image = imagecreatefromstring($produtos->fotoProduto);
                 ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
@@ -37,14 +36,21 @@ $this->title = 'My Yii Application';
             ?>
 
             <div class="card" style="width:24%;">
-                 <img class="card-img-top" <?= 'src="data:image/jpg;base64,' .  base64_encode($data). '"'?> alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title"><?= $produtos->nome?></h4>
+                <?= Html::a('
 
-                    <h4 class="card-subtitle mb-2 text-muted"><?= $preco?></h4>
-                    <p class="card-text"><?= $produtos->descricao?></p>
-                </div>
+                     <img class="card-img-top" src="data:image/jpg;base64,' .  base64_encode($data). '" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">'. $produtos->nome . '</h4>
+                        <h4 class="card-subtitle mb-2 text-muted">'. $preco .'</h4>
+                        <p class="card-text">'. $produtos->descricaoGeral .'</p>
+                    </div>
+
+                ', [ 'produto/view', 'id' => $produtos->idProduto])
+                ?>
+
             </div>
-        <?php } ?>
+
+            <?php
+        } ?>
         </div>
 </div>

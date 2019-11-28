@@ -75,7 +75,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $products = Produto::find()->indexBy('idProduto')->all();
+        return $this->render('index', array('products' => $products));
+
     }
 
     /**
@@ -139,6 +141,9 @@ class SiteController extends Controller
     public function actionSearchproducts(){
 
         return $this->render('about');
+        $searchInput = Yii::$app->request->get('pesquisa');
+        $products = Produto::find()->indexBy('idProduto')->all();
+        return $this->render('index', array('products' => $products));
     }
 
     /**

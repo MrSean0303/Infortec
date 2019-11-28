@@ -32,7 +32,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'APLICACAO',//Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -65,10 +65,11 @@ AppAsset::register($this);
 
     $controllerl = Yii::$app->controller;
     $homecheker = $controllerl->id.'/'.$controllerl->action->id;
-    if($homecheker=='site/index')
+
+    if($homecheker=='site/index' || $homecheker=='site/searchproducts')
     {
         echo '<form class="form-inline my-2 my-lg-0" style="float: right !important; padding: 10px !important;" action="'. Url::toRoute("searchproducts") .'">';
-        echo '<input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" onfocus="this.placeholder = \'\'" onblur="this.placeholder = \'Pesquisar\'" onmouseover="this.style.transition=\'0.5s\', this.style.width=\'300px \'" onmouseout="this.style.transition=\'0.5s\', this.style.width=\'200px\'" style ="width: 200px !important;">';
+        echo '<input class="form-control mr-sm-2" name="pesquisa" type="search" placeholder="Pesquisar" aria-label="Search" onfocus="this.placeholder = \'\'" onblur="this.placeholder = \'Pesquisar\'" onmouseover="this.style.transition=\'0.5s\', this.style.width=\'300px \'" onmouseout="this.style.transition=\'0.5s\', this.style.width=\'200px\'" style ="width: 200px !important;">';
         echo '</form>';
     }
 
