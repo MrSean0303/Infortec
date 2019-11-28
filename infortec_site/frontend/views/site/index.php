@@ -34,14 +34,12 @@ $this->title = 'My Yii Application';
             ?>
             <div class="card" style="width:24%;">
             <?= Html::a('
-
                      <img class="card-img-top" src="data:image/jpg;base64,' .  base64_encode($data). '" alt="Card image cap">
                     <div class="card-body">
                         <h4 class="card-title">'. $produtos->nome . '</h4>
-                        <h4 class="card-subtitle mb-2 text-muted">'. $preco .'</h4>
-                        <p class="card-text">'. $produtos->descricao .'</p>
+                        <h4 class="card-subtitle mb-2 text-muted">'. $preco .' €</h4>
+                        <p class="card-text">'. $produtos->descricaoGeral .'</p>
                     </div>
-
                 ', [ 'produto/view', 'id' => $produtos->idProduto])
                 ?>
 

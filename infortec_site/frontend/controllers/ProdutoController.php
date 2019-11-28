@@ -27,28 +27,22 @@ class ProdutoController extends Controller
     {
         $produtoSelecionado = Produto::findOne($id);
 
-        //formatar preço
-        $produtoSelecionado->preco = number_format($produtoSelecionado->preco, 2, ',', ' ');
 
         //transformar a descrição de componentes numa lista
         if (strpos($produtoSelecionado->descricaoGeral, " |") != false) {
-            while (strpos($produtoSelecionado->descricaoGeral, " |") != false) {
+            while (strpos($produtoSelecionado->descricaoGeral, " |") != false){
                 $position = strpos($produtoSelecionado->descricaoGeral, " |");
                 $component = substr($produtoSelecionado->descricaoGeral, 0, $position);
                 $produtoSelecionado->descricaoGeral = substr($produtoSelecionado->descricaoGeral, $position + 3);
                 $componentsList[] = $component;
             }
+            $componentsList[] = $produtoSelecionado->descricaoGeral;
+
             $produtoSelecionado->descricaoGeral = $componentsList;
         }
-
-        //Buscar o nome da subcategoria
+        //Buscar o nome da subcategoria e o valor do Iva
         $produtoSelecionado->subCategoria_id = $produtoSelecionado->getSubCategoria()->one()->nome;
-
-
-        var_dump($produtoSelecionado->getIva());
-        die();
-
-
+        $produtoSelecionado->iva_id = $produtoSelecionado->getIva()->one()->valorIva;
 
         return $this->render('view', [
             'prod' => $produtoSelecionado,
