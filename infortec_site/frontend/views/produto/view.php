@@ -1,14 +1,11 @@
 <?php
 
 use frontend\controllers\ProdutoController;
-use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $prod ProdutoController*/
 
 $this->title = $prod->nome;
-
     if ($prod->fotoProduto != null){
     $image = imagecreatefromstring($prod->fotoProduto);
     ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
@@ -18,19 +15,13 @@ $this->title = $prod->nome;
     }else {
         $data = 0;
     }
-
-
-
 ?>
-
-<div class="produto-view">
-
-    <div style="width: 100%">
-        <div>
-            <div style="width: 20%">
+        <div style="width: 90%">
+            <div class="img-viewProduto" style="width: 40% float:left">
                 <img class="card-img-top" src=<?="data:image/jpg;base64,".  base64_encode($data)?> alt="No image">
             </div>
-            <div>
+
+            <div class="naosei">
                 <div>
                     <h1><?=$prod->nome?></h1>
                 </div>
@@ -47,12 +38,12 @@ $this->title = $prod->nome;
                     }
                     ?>
                 </div>
-                <div >
+                <div>
                     <p><?=$prod->descricao?></p>
                 </div>
             </div>
         </div>
-        <div>
+        <div style="">
             <h4>Informações Gerais do produto</h4>
             <ul>
                 <?php
@@ -63,10 +54,3 @@ $this->title = $prod->nome;
             </ul>
         </div>
 
-
-    </div>
-
-
-
-
-</div>

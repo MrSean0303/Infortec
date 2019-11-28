@@ -165,3 +165,17 @@ a.desc:after {
 .preco{
     text-align: center !important;
 }
+
+
+/* View Produtos */
+
+.img-viewProduto{
+    width: 30%;
+    float:left;
+}
+
+.naosei{
+    width: 70%;
+    float:right;
+
+}
