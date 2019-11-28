@@ -3,23 +3,18 @@
 /* @var $this yii\web\View */
 /* @var $prod SiteController*/
 
-
 use common\models\Produto;
 use frontend\controllers\SiteController;
 use phpDocumentor\Reflection\Types\Null_;
 use yii\helpers\Html;
 
-
-$prs = $prod;
-
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
-
         <div class="allCards">
         <?php
-        foreach ($products as $produtos) {
+        foreach ($prod as $produtos) {
             if ($produtos->fotoProduto != null){
                 $image = imagecreatefromstring($produtos->fotoProduto);
                 ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
@@ -28,7 +23,6 @@ $this->title = 'My Yii Application';
                 ob_end_clean();
                 }else{
                 $data = 0;
-
             }
             $preco = number_format($produtos->preco, 2, ',', ' ');
             ?>
@@ -44,9 +38,9 @@ $this->title = 'My Yii Application';
                 ?>
 
             </div>
-
             <?php
-        } ?>
+        }
+        ?>
         </div>
 
 </div>
