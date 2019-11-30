@@ -3,7 +3,6 @@
 
 namespace frontend\controllers;
 
-use common\models\Favorito;
 use Yii;
 use common\models\Produto;
 use yii\filters\VerbFilter;
@@ -22,21 +21,6 @@ class ProdutoController extends Controller
             ],
         ];
     }
-
-    public function actionDeletefavorito($id){
-        $newFavorito = Favorito::findOne(['utilizador_id' => Yii::$app->user->id, 'produto_id' => $id,]);
-        $newFavorito->delete();
-        $this->actionView($id);
-    }
-
-    public function actionNewfavorito($id){
-        $newFavorito = new Favorito();
-        $newFavorito->produto_id = $id;
-        $newFavorito->utilizador_id = Yii::$app->user->id;
-        $newFavorito->save();
-        $this->actionView($id);
-    }
-
 
     public function actionView($id)
     {

@@ -49,10 +49,10 @@ $this->title = $prod->nome;
 
                     switch ($isfavorito){
                         case 'favorito':
-                            echo Html::a('<span class="glyphicon glyphicon-heart" style="color:red"></span>', [ 'produto/deletefavorito', 'id' => $prod->idProduto]);
+                            echo Html::a('<span class="glyphicon glyphicon-heart" style="color:red"></span>', [ 'favorito/deletefavorito', 'id' => $prod->idProduto]);
                             break;
                         case 'notFavorito':
-                            echo Html::a('<span class="glyphicon glyphicon-heart" style="color: gray"></span>', [ 'produto/newfavorito', 'id' => $prod->idProduto]);
+                            echo Html::a('<span class="glyphicon glyphicon-heart" style="color: gray"></span>', [ 'favorito/newfavorito', 'id' => $prod->idProduto]);
                             break;
                         case 'Guest':
                             echo Html::a('<span class="glyphicon glyphicon-heart" style="color: gray"></span>', [ 'site/login']);

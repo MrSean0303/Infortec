@@ -8,7 +8,7 @@ use frontend\controllers\SiteController;
 use phpDocumentor\Reflection\Types\Null_;
 use yii\helpers\Html;
 
-$this->title = 'My Yii Application';
+$this->title = 'Infortec';
 ?>
 <div class="site-index">
 
