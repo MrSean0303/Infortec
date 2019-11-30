@@ -3,6 +3,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Favorito;
 use Yii;
 use common\models\Produto;
 use yii\filters\VerbFilter;
@@ -22,12 +23,24 @@ class ProdutoController extends Controller
         ];
     }
 
+    public function actionDeletefavorito($id){
+        $newFavorito = Favorito::findOne(['utilizador_id' => Yii::$app->user->id, 'produto_id' => $id,]);
+        $newFavorito->delete();
+        $this->actionView($id);
+    }
+
+    public function actionNewfavorito($id){
+        $newFavorito = new Favorito();
+        $newFavorito->produto_id = $id;
+        $newFavorito->utilizador_id = Yii::$app->user->id;
+        $newFavorito->save();
+        $this->actionView($id);
+    }
+
 
     public function actionView($id)
     {
         $produtoSelecionado = Produto::findOne($id);
-
-
         //transformar a descrição de componentes numa lista
         if (strpos($produtoSelecionado->descricaoGeral, " |") != false) {
             while (strpos($produtoSelecionado->descricaoGeral, " |") != false){
@@ -44,8 +57,19 @@ class ProdutoController extends Controller
         $produtoSelecionado->subCategoria_id = $produtoSelecionado->getSubCategoria()->one()->nome;
         $produtoSelecionado->iva_id = $produtoSelecionado->getIva()->one()->valorIva;
 
+        if (!Yii::$app->user->isGuest) {
+            $isFavorito = $produtoSelecionado->getFavoritos()->where(['utilizador_id' => Yii::$app->user->id])->one();
+            if($isFavorito != null){
+                $isFavorito = 'favorito';
+            }else{
+                $isFavorito = 'notFavorito';
+            }
+        }else{
+            $isFavorito = "Guest";
+        }
+
         return $this->render('view', [
-            'prod' => $produtoSelecionado,
+            'prod' => $produtoSelecionado, 'isfavorito' => $isFavorito,
         ]);
     }
 }
