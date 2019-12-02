@@ -38,7 +38,7 @@ class ProdutoController extends Controller
             $produtoSelecionado->descricaoGeral = $componentsList;
         }
         //Buscar o nome da subcategoria e o valor do Iva
-       // $produtoSelecionado->subCategoria_id = $produtoSelecionado->getSubCategoria()->one()->nome;
+        $produtoSelecionado->subCategoria_id = $produtoSelecionado->getSubCategoria()->one()->nome;
         $produtoSelecionado->iva_id = $produtoSelecionado->getIva()->one()->valorIva;
 
 
