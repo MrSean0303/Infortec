@@ -165,3 +165,10 @@ a.desc:after {
 .preco{
     text-align: center !important;
 }
+
+.testeREE{
+    text-decoration: none !important;
+}
+.testeREE :hover{
+    text-decoration: none !important;
+}

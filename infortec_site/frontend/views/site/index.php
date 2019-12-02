@@ -10,8 +10,6 @@ use phpDocumentor\Reflection\Types\Null_;
 use yii\helpers\Html;
 
 
-$prs = $prod;
-
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
@@ -19,7 +17,7 @@ $this->title = 'My Yii Application';
 
         <div class="allCards">
         <?php
-        foreach ($products as $produtos) {
+        foreach ($prod as $produtos) {
             if ($produtos->fotoProduto != null){
                 $image = imagecreatefromstring($produtos->fotoProduto);
                 ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
@@ -39,7 +37,7 @@ $this->title = 'My Yii Application';
                     <div class="card-body">
                         <h4 class="card-title">'. $produtos->nome . '</h4>
                         <h4 class="card-subtitle mb-2 text-muted">'. $preco .'</h4>
-                        <p class="card-text">'. $produtos->descricao .'</p>
+                        <p class="card-text">'. $produtos->descricaoGeral .'</p>
                     </div>
 
                 ', [ 'produto/view', 'id' => $produtos->idProduto])

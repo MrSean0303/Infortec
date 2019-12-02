@@ -139,10 +139,9 @@ class SiteController extends Controller
 
     public function actionSearchproducts(){
 
-        return $this->render('about');
         $searchInput = Yii::$app->request->get('pesquisa');
-        $products = Produto::find()->indexBy('idProduto')->all();
-        return $this->render('index', array('products' => $products));
+        $products = Produto::find()->where(['like', 'nome', $searchInput])->all();
+        return $this->render('index', array('prod' => $products));
     }
 
     /**
