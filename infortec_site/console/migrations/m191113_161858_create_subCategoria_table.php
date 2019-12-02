@@ -32,6 +32,18 @@ class m191113_161858_create_subCategoria_table extends Migration
         'idCategoria',
         'CASCADE'
         );
+
+        //Inserir na base de dados
+        $this->insert('subCategoria', [
+            'idsubCategoria' => 1,
+            'nome' => 'Desktops',
+            'categoria_id' => 1
+        ]);
+        $this->insert('subCategoria', [
+            'idsubCategoria' => 2,
+            'nome' => 'NoteBook',
+            'categoria_id' => 1
+        ]);
     }
 
     /**

@@ -166,6 +166,20 @@ a.desc:after {
     text-align: center !important;
 }
 
+
+/* View Produtos */
+
+.img-viewProduto{
+    width: 30%;
+    float:left;
+}
+
+.naosei{
+    width: 70%;
+    float:right;
+
+}
+
 .testeREE{
     text-decoration: none !important;
 }
