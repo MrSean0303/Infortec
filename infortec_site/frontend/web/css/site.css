@@ -177,12 +177,34 @@ a.desc:after {
 .naosei{
     width: 70%;
     float:right;
-
 }
+
 
 .testeREE{
     text-decoration: none !important;
 }
+
 .testeREE :hover{
     text-decoration: none !important;
 }
+
+.product-show{
+    text-decoration: none !important;
+}
+
+.product-show :hover{
+    text-decoration: none !important;
+}
+
+.product-specs{
+    color: black;
+}
+
+.product-title{
+    color: #ff4800;
+}
+
+.product-show:hover .product-card .product-title{
+    color: #ff9c9c;
+}
+

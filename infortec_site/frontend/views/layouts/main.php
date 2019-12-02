@@ -11,7 +11,6 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\helpers\Url;
 
-
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -50,12 +49,27 @@ AppAsset::register($this);
         'label' => 'Categorias',
         'items' => [
             ['label' => 'Computadores',
-            'items' => [['label' => 'Fixo', 'url' => ['/site/contact'], 'options'=> ['class'=>'testeREE']],
-            ['label' => 'Portatil', 'url' => ['/site/contact']]], 'url' => ['/site/index']],
+                'items' => [['label' => 'Fixo', 'url' => ['/site/categoriafixo']],
+                    ['label' => 'Portatil', 'url' => ['/site/categoriaportatil']]], 'url' => ['/site/index'], 'options'=> ['class'=>'testeREE']],
             '<li class="divider"></li>',
             ['label' => 'Componentes', 'url' => ['/site/contact']],
         ],
     ];
+
+    /*
+         $menuItems[] = [
+        'label' => 'Categorias',
+        'items' => [
+            ['label' => 'Computadores',
+                'items' => [['label' => 'Fixo', 'url' => ['/site/categoriafixo']],
+                    ['label' => 'Portatil', 'url' => ['/site/categoriaportatil']]], 'url' => ['/site/index'], 'options'=> ['class'=>'testeREE']],
+            '<li class="divider"></li>',
+            ['label' => 'Componentes', 'url' => ['/site/contact']],
+        ],
+    ];
+
+     */
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
@@ -81,7 +95,7 @@ AppAsset::register($this);
     if($homecheker=='site/index' || $homecheker=='site/searchproducts')
     {
         echo '<form class="form-inline my-2 my-lg-0" style="float: right !important; padding: 8px !important;" action="'. Url::toRoute("searchproducts") .'">';
-        echo '<input class="form-control mr-sm-2" name="pesquisa" type="search" placeholder="Pesquisar" aria-label="Search" onfocus="this.placeholder = \'\'" onblur="this.placeholder = \'Pesquisar\'" onmouseover="this.style.transition=\'0.5s\', this.style.width=\'350px \'" onmouseout="this.style.transition=\'0.5s\', this.style.width=\'250px\'" style ="width: 250px !important;">';
+        echo '<input class="form-control mr-sm-2" name="pesquisa" type="search" placeholder="Pesquisar" aria-label="Search" onfocus="this.placeholder = \'\', this.style.transition=\'0.5s\', this.style.width=\'350px \'" onblur="this.placeholder = \'Pesquisar\', this.style.transition=\'0.5s\', this.style.width=\'250px\'" style ="width: 250px !important;">';
         echo '</form>';
     }
 

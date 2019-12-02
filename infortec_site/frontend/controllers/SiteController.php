@@ -137,6 +137,18 @@ class SiteController extends Controller
         }
     }
 
+    public function actionCategoriafixo()
+    {
+        $products = Produto::find()->where(['like', 'subCategoria_id', '2'])->all();
+        return $this->render('produtos', array('prod' => $products));
+    }
+
+    public function actionCategoriaportatil()
+    {
+        $products = Produto::find()->where(['like', 'subCategoria_id', '1'])->all();
+        return $this->render('produtos', array('prod' => $products));
+    }
+
     public function actionSearchproducts(){
 
         $searchInput = Yii::$app->request->get('pesquisa');
