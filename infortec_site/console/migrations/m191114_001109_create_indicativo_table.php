@@ -20,10 +20,53 @@ class m191114_001109_create_indicativo_table extends Migration
 
         $this->createTable('{{%indicativo}}', [
             'idIndicativo' => $this->primaryKey(),
-            'icon' => 'LONGBLOB',
+            'icon' => $this->string()->notNull()->unique(),
             'pais' => $this->string()->notNull()->unique(),
             'indicativo' => $this->string()->notNull()->unique(),
         ], $tableOptions);
+
+        $this->insert('indicativo',[
+            'idIndicativo' => 1,
+            'icon' => 'icon_Alemanha',
+            'pais' => 'Deutschland',
+            'indicativo' => '+49',
+        ]);
+
+        $this->insert('indicativo',[
+            'idIndicativo' => 2,
+            'icon' => 'icon_França',
+            'pais' => 'France',
+            'indicativo' => '+33',
+        ]);
+
+        $this->insert('indicativo',[
+            'idIndicativo' => 3,
+            'icon' => 'icon_EUA',
+            'pais' => 'United States',
+            'indicativo' => '+1',
+        ]);
+
+        $this->insert('indicativo',[
+            'idIndicativo' => 4,
+            'icon' => 'icon_Bangladesh',
+            'pais' => 'গণপ্রজাতন্ত্রী বাংলাদেশ',
+            'indicativo' => '+880',
+        ]);
+
+        $this->insert('indicativo',[
+            'idIndicativo' => 5,
+            'icon' => 'icon_Andorra',
+            'pais' => 'Andorra',
+            'indicativo' => '+34738',
+        ]);
+
+        $this->insert('indicativo',[
+            'idIndicativo' => 6,
+            'icon' => 'icon_Japao',
+            'pais' => '日本国',
+            'indicativo' => '+81',
+        ]);
+
     }
 
     /**

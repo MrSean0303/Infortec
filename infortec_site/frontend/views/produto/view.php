@@ -2,26 +2,19 @@
 
 use frontend\controllers\ProdutoController;
 use yii\bootstrap\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $prod ProdutoController*/
 /* @var $isfavorito ProdutoController*/
 
+$img = Url::to('@web/Imagens/').$prod->fotoProduto;
 
 $this->title = $prod->nome;
-    if ($prod->fotoProduto != null){
-    $image = imagecreatefromstring($prod->fotoProduto);
-    ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
-    imagejpeg($image, null, 80);
-    $data = ob_get_contents();
-    ob_end_clean();
-    }else {
-        $data = 0;
-    }
 ?>
         <div style="width: 90%">
             <div class="img-viewProduto">
-                <img class="card-img-top" src=<?="data:image/jpg;base64,".  base64_encode($data)?> alt="No image">
+                <img class="card-img-top" src=<?=Url::to('@web/Imagens/').$prod->fotoProduto ?> alt="No image">
             </div>
 
             <div class="naosei">

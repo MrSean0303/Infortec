@@ -22,7 +22,7 @@ class m191113_164827_create_produto_table extends Migration
         $this->createTable('{{%produto}}', [
             'idProduto' => $this->primaryKey(),
             'nome' =>$this->string()->notNull(),
-            'fotoProduto' => 'LONGBLOB',
+            'fotoProduto' => $this->string()->notNull()->unique(),
             'descricao' => $this->text()->notNull(),
             'descricaoGeral' => $this->text()->notNull(),
             'preco' => $this->decimal(10,2)->notNull(),
@@ -54,7 +54,7 @@ class m191113_164827_create_produto_table extends Migration
         $this->insert('produto',[
             'idProduto' => 1,
             'nome' => 'Computador Desktop Gaming GML-DR32DC9',
-            'fotoProduto' => null,
+            'fotoProduto' => 'prod_1',
             'descricao' => 'O seu computador desktop, com componentes selecionados e montagem Premium by PCDIGA: os maiores especialistas em informática e tecnologia em Portugal.',
             'descricaoGeral' => 'AMD Ryzen 3 2300X | Nox Infinity Atom RGB | Asus Prime A320M-K | Sapphire Radeon RX 470 4GB Bulk | 8GB RAM | SSD 240GB',
             'preco' => 1999.99,
@@ -68,7 +68,7 @@ class m191113_164827_create_produto_table extends Migration
         $this->insert('produto',[
             'idProduto' => 2,
             'nome' => 'Computador MSI Infinite 8RB-618XES Intel Core i5/GeForce GTX 1050 Ti',
-            'fotoProduto' => null,
+            'fotoProduto' => 'prod_2',
             'descricao' => 'O seu computador desktop, com componentes selecionados e montagem Premium by PCDIGA: os maiores especialistas em informática e tecnologia em Portugal.',
             'descricaoGeral' => 'Intel Core i5-8400 | Free DOS | 8GB RAM | GeForce GTX 1050 Ti | SSD 256GB + HDD 1TB',
             'preco' => 699.00,

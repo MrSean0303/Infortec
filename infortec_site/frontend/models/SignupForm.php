@@ -46,7 +46,7 @@ class SignupForm extends Model
             ['morada', 'trim'],
             ['morada', 'required'],
             ['morada', 'string', 'max' => 255],
-            ['morada', 'string', 'length' => [4, 24]],
+            ['morada', 'string', 'length' => [4, 255]],
 
             ['nif', 'trim'],
             ['nif', 'required'],

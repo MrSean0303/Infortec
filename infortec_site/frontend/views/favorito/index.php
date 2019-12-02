@@ -6,8 +6,10 @@
 
 use yii\helpers\Html;
 use frontend\controllers\FavoritoController;
+use yii\helpers\Url;
+
 ?>
-<h1>Hello</h1>
+<h1 style="text-align: center">Lista de favoritos</h1>
 
 <div class="site-index">
     <?php
@@ -15,20 +17,11 @@ use frontend\controllers\FavoritoController;
         echo "<h1>Não tem produtos nos favoritos</h1>";
     }else {
         foreach ($produtos as $produto) {
-            if ($produto->fotoProduto != null) {
-                $image = imagecreatefromstring($produto->fotoProduto);
-                ob_start(); //You could also just output the $image via header() and bypass this buffer capture.
-                imagejpeg($image, null, 80);
-                $data = ob_get_contents();
-                ob_end_clean();
-            } else {
-                $data = 0;
-            }
             ?>
             <div class="allCards">
                 <div class="card" style="width:24%;">
                     <?= Html::a('
-            <img class="card-img-top" src="data:image/jpg;base64,' . base64_encode($data) . '" alt="Card image cap">
+            <img class="card-img-top" src="'. Url::to('@web/Imagens/').$produto->fotoProduto .'" alt="Card image cap">
             <div class="card-body">
             <h4 class="card-title">' . $produto->nome . '</h4>
              </div>

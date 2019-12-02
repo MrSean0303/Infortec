@@ -23,13 +23,12 @@ class m191113_161114_create_categoria_table extends Migration
             'nome' => $this->string()->notNull()->unique(),
         ], $tableOptions);
 
-
-        //Inserir na base de dados
-        $this->insert( 'categoria', [
+        $this->insert('categoria',[
             'idCategoria' => 1,
             'nome' => 'Computadores'
         ]);
-        $this->insert( 'categoria', [
+
+        $this->insert('categoria',[
             'idCategoria' => 2,
             'nome' => 'Componentes'
         ]);
