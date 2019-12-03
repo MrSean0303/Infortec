@@ -140,18 +140,18 @@ class SiteController extends Controller
         }
     }
 
-    public function actionCategoriafixo()
+    public function actionCategoriaportatil()
     {
         $products = Produto::find()->where(['like', 'subcategoria_id', '2'])->all();
-        $subcategoria = "Fixos";
+        $subcategoria = "Computadores Portáteis";
 
         return $this->render('produtos', array('prod' => $products, 'infositecontroller' => $subcategoria));
     }
 
-    public function actionCategoriaportatil()
+    public function actionCategoriafixo()
     {
         $products = Produto::find()->where(['like', 'subCategoria_id', '1'])->all();
-        $subcategoria = "Portáteis";
+        $subcategoria = "Computadores Fixos";
 
         return $this->render('produtos', array('prod' => $products, 'infositecontroller' => $subcategoria));
     }

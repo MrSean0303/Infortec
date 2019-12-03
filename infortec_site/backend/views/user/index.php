@@ -2,22 +2,20 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ProdutoSearch */
+/* @var $searchModel backend\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $model common\models\Produto */
 
-$this->title = 'Produtos';
+$this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="produto-index">
+<div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Produto', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,17 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'idProduto',
-            'nome',
-            'fotoProduto',
-            //'descricao:ntext',
-            //'descricaoGeral:ntext',
-            'preco',
-            'quantStock',
-            'valorDesconto',
-            'pontos',
-            //'subCategoria_id',
-            //'iva_id',
+            //'id',
+            'username',
+            //'auth_key',
+            //'password_hash',
+            //'password_reset_token',
+            'email:email',
+            'status',
+            'privileges',
+            //'created_at',
+            //'updated_at',
+            //'verification_token',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

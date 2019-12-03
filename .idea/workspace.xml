@@ -116,6 +116,7 @@
       <workItem from="1575028359696" duration="2626000" />
       <workItem from="1575274469491" duration="5172000" />
       <workItem from="1575312615643" duration="12405000" />
+      <workItem from="1575389198750" duration="11178000" />
     </task>
     <servers />
   </component>
@@ -134,5 +135,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/infortec_site/frontend/views/site/produtos.php</url>
+          <line>7</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

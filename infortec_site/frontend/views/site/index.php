@@ -21,10 +21,10 @@ $this->title = 'Infortec';
             <div class="product-show card" style="width:24%;">
             <?= Html::a('
                      <img class="card-img-top" src="' .Url::to('@web/Imagens/').$produtos->fotoProduto. '" alt="Card image cap">
-                    <div class="card-body">
-                        <h4 class="card-title">'. $produtos->nome . '</h4>
-                        <h4 class="card-subtitle mb-2 text-muted">'. $preco .' €</h4>
-                        <p class="card-text">'. $produtos->descricaoGeral .'</p>
+                    <div class="product-card card-body">
+                        <h4 class="product-title card-title">'. $produtos->nome . '</h4>
+                        <h4 class="card-subtitle mb-2 text-muted" style="text-align: center !important;">'. $preco .' €</h4>
+                        <p class="product-specs card-text">'. $produtos->descricaoGeral .'</p>
                     </div>
                 ', [ 'produto/view', 'id' => $produtos->idProduto])
                 ?>
