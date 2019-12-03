@@ -1,7 +1,9 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $infositecontroller SiteController*/
 /* @var $prod SiteController*/
+
 
 use common\models\Produto;
 use frontend\controllers\SiteController;
@@ -11,7 +13,7 @@ use yii\helpers\Html;
 $this->title = 'Produtos Infortec';
 ?>
 <div class="site-index">
-
+<h1><?= $infositecontroller; ?></h1>
     <div class="allCards">
         <?php
         foreach ($prod as $produtos) {

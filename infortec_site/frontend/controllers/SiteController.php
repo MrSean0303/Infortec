@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Categoria;
+use common\models\Subcategoria;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -140,21 +142,27 @@ class SiteController extends Controller
 
     public function actionCategoriafixo()
     {
-        $products = Produto::find()->where(['like', 'subCategoria_id', '2'])->all();
-        return $this->render('produtos', array('prod' => $products));
+        $products = Produto::find()->where(['like', 'subcategoria_id', '2'])->all();
+        $subcategoria = "Fixos";
+
+        return $this->render('produtos', array('prod' => $products, 'infositecontroller' => $subcategoria));
     }
 
     public function actionCategoriaportatil()
     {
         $products = Produto::find()->where(['like', 'subCategoria_id', '1'])->all();
-        return $this->render('produtos', array('prod' => $products));
+        $subcategoria = "Portáteis";
+
+        return $this->render('produtos', array('prod' => $products, 'infositecontroller' => $subcategoria));
     }
 
     public function actionSearchproducts(){
 
         $searchInput = Yii::$app->request->get('pesquisa');
         $products = Produto::find()->where(['like', 'nome', $searchInput])->all();
-        return $this->render('index', array('prod' => $products));
+
+        $pesquisa = "A apresentar resultados para: " . $searchInput;
+        return $this->render('produtos', array('prod' => $products, 'infositecontroller' => $pesquisa));
     }
 
     /**
