@@ -1,8 +1,6 @@
 <?php
 namespace frontend\controllers;
 
-use common\models\Categoria;
-use common\models\Subcategoria;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -140,29 +138,23 @@ class SiteController extends Controller
         }
     }
 
-    public function actionCategoriaportatil()
-    {
-        $products = Produto::find()->where(['like', 'subcategoria_id', '2'])->all();
-        $subcategoria = "Computadores Portáteis";
-
-        return $this->render('produtos', array('prod' => $products, 'infositecontroller' => $subcategoria));
-    }
-
     public function actionCategoriafixo()
     {
-        $products = Produto::find()->where(['like', 'subCategoria_id', '1'])->all();
-        $subcategoria = "Computadores Fixos";
+        $products = Produto::find()->where(['like', 'subCategoria_id', '2'])->all();
+        return $this->render('produtos', array('prod' => $products));
+    }
 
-        return $this->render('produtos', array('prod' => $products, 'infositecontroller' => $subcategoria));
+    public function actionCategoriaportatil()
+    {
+        $products = Produto::find()->where(['like', 'subCategoria_id', '1'])->all();
+        return $this->render('produtos', array('prod' => $products));
     }
 
     public function actionSearchproducts(){
 
         $searchInput = Yii::$app->request->get('pesquisa');
         $products = Produto::find()->where(['like', 'nome', $searchInput])->all();
-
-        $pesquisa = "A apresentar resultados para: " . $searchInput;
-        return $this->render('produtos', array('prod' => $products, 'infositecontroller' => $pesquisa));
+        return $this->render('index', array('prod' => $products));
     }
 
     /**
