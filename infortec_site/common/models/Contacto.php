@@ -31,6 +31,7 @@ class Contacto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['numero', 'utilizador_id', 'indicativo_id'], 'required'],
             [['numero', 'utilizador_id', 'indicativo_id'], 'integer'],
             [['indicativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Indicativo::className(), 'targetAttribute' => ['indicativo_id' => 'idIndicativo']],
             [['utilizador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizador::className(), 'targetAttribute' => ['utilizador_id' => 'idUtilizador']],

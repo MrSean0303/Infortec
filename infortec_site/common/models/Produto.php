@@ -9,8 +9,9 @@ use Yii;
  *
  * @property int $idProduto
  * @property string $nome
- * @property resource $fotoProduto
+ * @property string $fotoProduto
  * @property string $descricao
+ * @property string $descricaoGeral
  * @property string $preco
  * @property int $quantStock
  * @property string $valorDesconto
@@ -20,8 +21,8 @@ use Yii;
  *
  * @property Favorito[] $favoritos
  * @property Linhavenda[] $linhavendas
- * @property Categoria $subCategoria
  * @property Iva $iva
+ * @property Subcategoria $subCategoria
  */
 class Produto extends \yii\db\ActiveRecord
 {
@@ -39,13 +40,14 @@ class Produto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'descricao', 'preco', 'quantStock', 'subCategoria_id'], 'required'],
-            [['fotoProduto', 'descricao'], 'string'],
+            [['nome', 'fotoProduto', 'descricao', 'descricaoGeral', 'preco', 'quantStock', 'subCategoria_id'], 'required'],
+            [['descricao', 'descricaoGeral'], 'string'],
             [['preco', 'valorDesconto'], 'number'],
             [['quantStock', 'pontos', 'subCategoria_id', 'iva_id'], 'integer'],
-            [['nome'], 'string', 'max' => 255],
-            [['subCategoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['subCategoria_id' => 'idCategoria']],
+            [['nome', 'fotoProduto'], 'string', 'max' => 255],
+            [['fotoProduto'], 'unique'],
             [['iva_id'], 'exist', 'skipOnError' => true, 'targetClass' => Iva::className(), 'targetAttribute' => ['iva_id' => 'idIva']],
+            [['subCategoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subcategoria::className(), 'targetAttribute' => ['subCategoria_id' => 'idsubCategoria']],
         ];
     }
 
@@ -59,6 +61,7 @@ class Produto extends \yii\db\ActiveRecord
             'nome' => 'Nome',
             'fotoProduto' => 'Foto Produto',
             'descricao' => 'Descricao',
+            'descricaoGeral' => 'Descricao Geral',
             'preco' => 'Preco',
             'quantStock' => 'Quant Stock',
             'valorDesconto' => 'Valor Desconto',
@@ -87,17 +90,16 @@ class Produto extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubCategoria()
-    {
-        return $this->hasOne(Categoria::className(), ['idCategoria' => 'subCategoria_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getIva()
     {
         return $this->hasOne(Iva::className(), ['idIva' => 'iva_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSubCategoria()
+    {
+        return $this->hasOne(Subcategoria::className(), ['idsubCategoria' => 'subCategoria_id']);
+    }
 }
