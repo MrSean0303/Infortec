@@ -1,7 +1,8 @@
 <?php
 
-namespace Frontend\models;
+namespace frontend\models;
 
+use common\models\Contacto;
 use common\models\Indicativo;
 use common\models\Utilizador;
 use Yii;
@@ -10,16 +11,16 @@ use yii\base\Model;
 /**
  * This is the model class for table "contacto".
  *
- * @property int $idContacto
- * @property int $numero
- * @property int $utilizador_id
- * @property int $indicativo_id
- *
  * @property Indicativo $indicativo
  * @property Utilizador $utilizador
  */
 class ContactoForm extends Model
 {
+    public $idContacto;
+    public $numero;
+    public $utilizador_id;
+    public $indicativo_id;
+
     /**
      * {@inheritdoc}
      */
@@ -52,6 +53,24 @@ class ContactoForm extends Model
             'utilizador_id' => 'Utilizador ID',
             'indicativo_id' => 'Indicativo ID',
         ];
+    }
+
+    public function create(){
+
+        if (!$this->validate()) {
+            return null;
+        }
+
+        $contacto = new Contacto();
+
+        $contacto->numero = $this->numero;
+        $contacto->utilizador_id = Yii::$app->user->id;
+        $contacto->indicativo_id = $this->indicativo_id;
+
+        $contacto->save();
+
+        return true;
+
     }
 
     /**

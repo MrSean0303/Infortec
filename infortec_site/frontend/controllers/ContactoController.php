@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Contacto;
 use common\models\Indicativo;
+use common\models\User;
 use common\models\Utilizador;
 use Yii;
 use frontend\models\ContactoForm;
@@ -38,7 +39,6 @@ class ContactoController extends Controller
      */
     public function actionIndex()
     {
-
         $contactos_indicativos['contacto'] = Contacto::find()->where(['utilizador_id' => Yii::$app->user->id])->all();
 
         if ($contactos_indicativos['contacto'] != null){
@@ -80,10 +80,14 @@ class ContactoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new ContactoForm();
+        $model['contacto'] = new ContactoForm();
+        $model['indicativo'] = Indicativo::find()->all();
+        $user = User::find()->where(['id' => Yii::$app->user->id])->one();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idContacto]);
+        $model['contacto']->utilizador_id = $user->id;
+
+        if ($model['contacto']->load(Yii::$app->request->post()) && $model['contacto']->create()) {
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [

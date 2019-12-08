@@ -16,8 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1><?= Html::encode($this->title) ?></h1>
 
 <?php
-if($contactos != null){
+echo Html::a('Create contacto', ['create'], ['class' => 'btn btn-primary']);
+echo '<p></p>';
 
+if($contactos != null){
 ?>
     <table class="table table-bordered">
     <thead>
