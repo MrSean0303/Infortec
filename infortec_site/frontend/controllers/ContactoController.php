@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\models\Contacto;
+use common\models\Indicativo;
+use common\models\Utilizador;
 use Yii;
 use frontend\models\ContactoForm;
 use frontend\models\ContactoSearch;
@@ -35,12 +38,18 @@ class ContactoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ContactoSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        $contactos_indicativos['contacto'] = Contacto::find()->where(['utilizador_id' => Yii::$app->user->id])->all();
+
+        if ($contactos_indicativos['contacto'] != null){
+            foreach ($contactos_indicativos['contacto'] as $cont){
+                $ind[] = Indicativo::find()->where(['idIndicativo' => $cont->indicativo_id])->one();
+            }
+            $contactos_indicativos['indicativo'] = $ind;
+        }
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'contactos' => $contactos_indicativos,
         ]);
     }
 
@@ -52,8 +61,15 @@ class ContactoController extends Controller
      */
     public function actionView($id)
     {
+
+        $contacto = $this->findModel($id);
+        $model['indicativo'] = Indicativo::find()->where(['idIndicativo' => $contacto->indicativo_id])->one();
+
+        $model['contacto'] = $contacto;
+
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -84,11 +100,14 @@ class ContactoController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model['contacto'] = $this->findModel($id);
+        $user = Utilizador::find()->where(['idUtilizador' => $model['contacto']->utilizador_id])->one();
+        $model['indicativo'] = Indicativo::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idContacto]);
+        if ($model['contacto']->load(Yii::$app->request->post()) && $model['contacto']->save()) {
+            return $this->redirect(['view', 'id' => $model['contacto']->idContacto]);
         }
+        $model['contacto']->utilizador_id = $user->nome;
 
         return $this->render('update', [
             'model' => $model,
@@ -118,7 +137,7 @@ class ContactoController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = ContactoForm::findOne($id)) !== null) {
+        if (($model = Contacto::findOne($id)) !== null) {
             return $model;
         }
 

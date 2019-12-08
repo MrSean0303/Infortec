@@ -5,6 +5,7 @@ namespace Frontend\models;
 use common\models\Indicativo;
 use common\models\Utilizador;
 use Yii;
+use yii\base\Model;
 
 /**
  * This is the model class for table "contacto".
@@ -17,7 +18,7 @@ use Yii;
  * @property Indicativo $indicativo
  * @property Utilizador $utilizador
  */
-class ContactoForm extends \yii\db\ActiveRecord
+class ContactoForm extends Model
 {
     /**
      * {@inheritdoc}
@@ -34,7 +35,7 @@ class ContactoForm extends \yii\db\ActiveRecord
     {
         return [
             [['numero', 'utilizador_id', 'indicativo_id'], 'required'],
-            [['numero', 'utilizador_id', 'indicativo_id'], 'integer'],
+            [['numero', 'utilizador_id', 'indicativo_id', ], 'integer'],
             [['indicativo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Indicativo::className(), 'targetAttribute' => ['indicativo_id' => 'idIndicativo']],
             [['utilizador_id'], 'exist', 'skipOnError' => true, 'targetClass' => Utilizador::className(), 'targetAttribute' => ['utilizador_id' => 'idUtilizador']],
         ];

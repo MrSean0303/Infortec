@@ -6,18 +6,14 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\ContactoForm */
 
-$this->title = $model->idContacto;
-$this->params['breadcrumbs'][] = ['label' => 'Contacto Forms', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Contactos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="contacto-form-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idContacto], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idContacto], [
+        <?= Html::a('Alterar contacto', ['update', 'id' => $model['contacto']->idContacto], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Apagar contacto', ['delete', 'id' => $model['contacto']->idContacto], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -26,14 +22,33 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'idContacto',
-            'numero',
-            'utilizador_id',
-            'indicativo_id',
-        ],
-    ]) ?>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td scope="row">Bandeira do pais</td>
+            <td><?= Html::img('@web/Imagens/icons/'. $model['indicativo']->icon,  ['alt' => 'img', 'width' =>'10%' ])?> </td>
+        </tr>
+        <tr>
+            <td scope="row">Pais</td>
+            <td><?=$model['indicativo']->pais?></td>
+        </tr>
+        <tr>
+            <td scope="row">Indicativo</td>
+            <td><?=$model['indicativo']->indicativo?></td>
+        </tr>
+        <tr>
+            <td scope="row">Numero</td>
+            <td><?=$model['contacto']->numero?></td>
+        </tr>
+        </tbody>
+    </table>
+
+
 
 </div>
