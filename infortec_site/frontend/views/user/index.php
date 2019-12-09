@@ -34,11 +34,11 @@ use yii\helpers\Html;
         </tbody>
     </table>
 
-    <?= Html::a('Change password', ['user/change_password'], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Alterar password', ['user/change_password'], ['class' => 'btn btn-primary']) ?>
 
     <hr>
-    <?= Html::a('Visualizar Conctatos', ['contacto/index'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Visualizar contactos', ['contacto/index'], ['class' => 'btn btn-success']) ?>
 
-    <?= Html::a('Alterar dados do Utilizado', ['edituser'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Alterar dados do Utilizador', ['edituser'], ['class' => 'btn btn-success']) ?>
 
 </div>

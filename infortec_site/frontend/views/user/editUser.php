@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form ActiveForm */
 
 $this->title = "Editar dados do utilizador";
-$this->params['breadcrumbs'][] = ['label' => 'Dados User', 'url' => ['user/index']];
+$this->params['breadcrumbs'][] = ['label' => 'Dados de utilizador', 'url' => ['user/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

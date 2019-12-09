@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
     $this->title = "Alterar palavra-passe do utilizador";
-    $this->params['breadcrumbs'][] = ['label' => 'Dados User', 'url' => ['user/index']];
+    $this->params['breadcrumbs'][] = ['label' => 'Dados de utilizador', 'url' => ['user/index']];
     $this->params['breadcrumbs'][] = $this->title;
 ?>
 
