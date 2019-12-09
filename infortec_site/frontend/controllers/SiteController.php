@@ -142,13 +142,13 @@ class SiteController extends Controller
     public function actionCategoriafixo()
     {
         $products = Produto::find()->where(['like', 'subCategoria_id', '2'])->all();
-        return $this->render('produtos', array('prod' => $products));
+        return $this->render('index', ['prod' => $products]);
     }
 
     public function actionCategoriaportatil()
     {
         $products = Produto::find()->where(['like', 'subCategoria_id', '1'])->all();
-        return $this->render('produtos', array('prod' => $products));
+        return $this->render('index', array('prod' => $products));
     }
 
     public function actionSearchproducts(){
@@ -176,6 +176,7 @@ class SiteController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
             return $this->goHome();
