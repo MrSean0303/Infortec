@@ -12,7 +12,7 @@ $img = Url::to('@web/Imagens/').$prod->fotoProduto;
 
 $this->title = $prod->nome;
 ?>
-        <div style="width: 90%">
+        <div style="width: 90%; display: inline-block">
             <div class="img-viewProduto">
                 <img class="card-img-top" src=<?=Url::to('@web/Imagens/').$prod->fotoProduto ?> alt="No image">
             </div>
@@ -54,19 +54,26 @@ $this->title = $prod->nome;
                             echo 'Erro';
                     }
                         ?>
-
                 </div>
-
             </div>
         </div>
         <div style="">
             <h4>Informações Gerais do produto</h4>
+            <?php
+                if(is_array($prod->descricaoGeral)) {
+            ?>
             <ul>
                 <?php
-                    for ($i=0; $i < count($prod->descricaoGeral); $i++){
-                        echo '<li>'.$prod->descricaoGeral[$i] . '</li>';
+                    for ($i = 0; $i < count($prod->descricaoGeral); $i++) {
+                        echo '<li>' . $prod->descricaoGeral[$i] . '</li>';
                     }
                 ?>
             </ul>
+            <?php
+                }else{
+                    echo '<p>' . $prod->descricaoGeral . '</p>';
+
+                }
+                ?>
         </div>
 

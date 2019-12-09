@@ -39,10 +39,35 @@ class m191113_161858_create_subCategoria_table extends Migration
             'nome' => 'Desktops',
             'categoria_id' => 1
         ]);
+
         $this->insert('subCategoria', [
             'idsubCategoria' => 2,
-            'nome' => 'NoteBook',
+            'nome' => 'NoteBooks',
             'categoria_id' => 1
+        ]);
+
+        $this->insert('subCategoria', [
+            'idsubCategoria' => 3,
+            'nome' => 'Placas Gráficas',
+            'categoria_id' => 2
+        ]);
+
+        $this->insert('subCategoria', [
+            'idsubCategoria' => 4,
+            'nome' => 'Memórias RAM',
+            'categoria_id' => 2
+        ]);
+
+        $this->insert('subCategoria', [
+            'idsubCategoria' => 5,
+            'nome' => 'Ventoinhas',
+            'categoria_id' => 2
+        ]);
+
+        $this->insert('subCategoria', [
+            'idsubCategoria' => 6,
+            'nome' => 'Motherboard',
+            'categoria_id' => 2
         ]);
     }
 

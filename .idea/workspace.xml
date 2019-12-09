@@ -86,7 +86,7 @@
   <component name="ProjectId" id="1UF5sqDeY8HTU6vcXrRZWUklSVC" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/infortec_site" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
@@ -115,7 +115,13 @@
       <workItem from="1574969079434" duration="6545000" />
       <workItem from="1575028359696" duration="2626000" />
       <workItem from="1575274469491" duration="5172000" />
+<<<<<<< Updated upstream
       <workItem from="1575312615643" duration="12405000" />
+      <workItem from="1575389198750" duration="11178000" />
+=======
+      <workItem from="1575312615643" duration="9771000" />
+      <workItem from="1575568815540" duration="26000" />
+>>>>>>> Stashed changes
       <workItem from="1575389198750" duration="12004000" />
       <workItem from="1575452182174" duration="166000" />
       <workItem from="1575537495944" duration="4802000" />

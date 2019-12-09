@@ -3,6 +3,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Subcategoria;
 use Yii;
 use common\models\Produto;
 use yii\filters\VerbFilter;

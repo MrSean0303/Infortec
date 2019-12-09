@@ -1,6 +1,8 @@
 <?php
 namespace backend\controllers;
 
+use common\models\Venda;
+use phpDocumentor\Reflection\Types\Null_;
 use common\models\User;
 use Yii;
 use yii\web\Controller;
@@ -61,6 +63,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $vendas = Venda::find()->indexBy('idVenda')->all();
+
+
         return $this->render('index');
     }
 

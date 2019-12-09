@@ -33,8 +33,8 @@ class Linhavenda extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['quantidade', 'preco', 'venda_id', 'produto_id'], 'required'],
             [['quantidade', 'isPontos', 'venda_id', 'produto_id'], 'integer'],
-            [['preco'], 'required'],
             [['preco'], 'number'],
             [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produto::className(), 'targetAttribute' => ['produto_id' => 'idProduto']],
             [['venda_id'], 'exist', 'skipOnError' => true, 'targetClass' => Venda::className(), 'targetAttribute' => ['venda_id' => 'idVenda']],

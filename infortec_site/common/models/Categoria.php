@@ -10,7 +10,6 @@ use Yii;
  * @property int $idCategoria
  * @property string $nome
  *
- * @property Produto[] $produto
  * @property Subcategoria[] $subcategorias
  */
 class Categoria extends \yii\db\ActiveRecord
@@ -44,14 +43,6 @@ class Categoria extends \yii\db\ActiveRecord
             'idCategoria' => 'Id Categoria',
             'nome' => 'Nome',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProdutos()
-    {
-        return $this->hasMany(Produto::className(), ['subCategoria_id' => 'idCategoria']);
     }
 
     /**

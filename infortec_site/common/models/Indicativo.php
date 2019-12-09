@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "indicativo".
  *
  * @property int $idIndicativo
- * @property resource $icon
+ * @property string $icon
  * @property string $pais
  * @property string $indicativo
  *
@@ -30,9 +30,9 @@ class Indicativo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['icon'], 'string'],
-            [['pais', 'indicativo'], 'required'],
-            [['pais', 'indicativo'], 'string', 'max' => 255],
+            [['icon', 'pais', 'indicativo'], 'required'],
+            [['icon', 'pais', 'indicativo'], 'string', 'max' => 255],
+            [['icon'], 'unique'],
             [['pais'], 'unique'],
             [['indicativo'], 'unique'],
         ];

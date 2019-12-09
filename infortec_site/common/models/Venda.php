@@ -31,7 +31,7 @@ class Venda extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['totalVenda'], 'required'],
+            [['totalVenda', 'data', 'utilizador_id'], 'required'],
             [['totalVenda'], 'number'],
             [['data'], 'safe'],
             [['utilizador_id'], 'integer'],
