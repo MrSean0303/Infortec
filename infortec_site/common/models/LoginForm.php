@@ -62,18 +62,6 @@ class LoginForm extends Model
         return false;
     }
 
-    public function loginBackEnd()
-    {
-        if ($this->validate()) {
-            if($this->getUserPrivileges() != 0)
-                return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
-            else
-                return false;
-        }
-
-        return false;
-    }
-
     /**
      * Finds user by [[username]]
      *
@@ -88,8 +76,13 @@ class LoginForm extends Model
         return $this->_user;
     }
 
-    public function getUserPrivileges()
+    public function loginAdmin()
     {
-        return $this->getUser()->privileges;
+        if ($this->validate() && User::isUserAdmin($this->username)) {
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+        } else {
+            return false;
+        }
     }
+
 }

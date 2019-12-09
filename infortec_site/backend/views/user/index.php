@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'password_reset_token',
             'email:email',
             'status',
-            'privileges',
+            'role',
             //'created_at',
             //'updated_at',
             //'verification_token',
