@@ -6,6 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\ContactoForm */
 
+$this->params['breadcrumbs'][] = ['label' => 'Dados User', 'url' => ['user/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Contactos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

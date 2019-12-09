@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 /* @var $model frontend\models\ContactoForm */
 
 $this->title = 'Alterar Contacto de ' . $model['contacto']->utilizador_id;
+$this->params['breadcrumbs'][] = ['label' => 'Dados User', 'url' => ['user/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Contactos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model['contacto']->numero, 'url' => ['view', 'id' => $model['contacto']->idContacto]];
 $this->params['breadcrumbs'][] = 'Alterar';

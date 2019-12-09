@@ -25,6 +25,10 @@ class UserController extends Controller
         $model->nif = $utilizador->nif;
         $model->pontos = $utilizador->numPontos;
 
+        if($model->nif == null){
+            $model->nif = "Não tem";
+        }
+
         return $this->render('index', ['model' => $model]);
     }
 
@@ -35,14 +39,12 @@ class UserController extends Controller
 
         $model = new UserForm();
 
-        /*$indicativos = Indicativo::find()->all();
-        $contactos = Contacto::find()->where(['utilizador_id' => $utilizador->idUtilizador])->all();*/
-
         if ($model->load(Yii::$app->request->post()) && $model->editUser()) {
             Yii::$app->session->setFlash('success', 'Dados Alterados com sucesso');
             $model->pontos = $utilizador->numPontos;
             return $this->render('index', ['model' => $model]);
-        }else{
+        }
+
             $model ->username = $user->username;
             $model->nome = $utilizador->nome;
             $model->email = $user->email;
@@ -50,8 +52,29 @@ class UserController extends Controller
             $model->nif = $utilizador->nif;
             $model->pontos = $utilizador->numPontos;
             return $this->render('Edituser', ['model' => $model]);
-        }
-
     }
 
+    public function actionChange_password()
+    {
+        $model = new UserForm();
+        $user = User::findIdentity(Yii::$app->user->id);
+        $utilizador = Utilizador::find()->where(['user_id' => $user->id])->one();
+
+
+
+        if ($model->load(Yii::$app->request->post()) && $user->validatePassword($model->oldpassword)){
+            $user->setPassword($model->password);
+            $user->save();
+            Yii::$app->session->setFlash('success', 'Palavra passe alterada com sucesso');
+            $model ->username = $user->username;
+            $model->nome = $utilizador->nome;
+            $model->email = $user->email;
+            $model->morada = $utilizador->morada;
+            $model->nif = $utilizador->nif;
+            $model->pontos = $utilizador->numPontos;
+            return $this->render('index', ['model' => $model]);
+        }
+
+        return $this->render('changepassword', ['model' => $model]);
+    }
 }
