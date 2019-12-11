@@ -119,3 +119,14 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.coiso{
+    width: 20%;
+    margin: 2.5rem 0;
+    text-align: center;
+}
+
+.glyphicon.glyphicon-plus {
+    font-size: 75px;
+    color: #2b20f5;
+}

@@ -1,53 +1,46 @@
 <?php
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
+/* @var $vendas backend\controllers\SiteController */
+/* @var $produtos backend\controllers\SiteController */
 
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+    <h2>Dia: <?=$vendas['data']?></h2>
+    <h4>Income: <?=number_format($vendas['vendas'], 2)?> €</h4>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+    <div style="height: 100%; width: 100%">
+        <div class="coiso">
+            <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span><br><span style="color: black">Visualizar Utilizador</span>', ['user/index']) ?>
         </div>
-
+        <div class="coiso">
+            <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span><br><span style="color: black">Visualizar Produto</span>', ['produto/index']) ?>
+        </div>
+        <div class="coiso">
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span><br><span style="color: black">Criar novo Produto</span>', ['produto/create']) ?>
+        </div>
+        <div class="coiso">
+            <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span><br><span style="color: black">Visualizar Categoria</span>', ['categoria/index']) ?>
+        </div>
+        <div class="coiso">
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span><br><span style="color: black">Criar nova Categoria</span>', ['categoria/create']) ?>
+        </div>
+        <div class="coiso">
+            <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span><br><span style="color: black">Visualizar SubCategoria</span>', ['subcategoria/index']) ?>
+        </div>
+        <div class="coiso">
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span><br><span style="color: black">Criar nova SubCategoria</span>', ['subcategoria/create']) ?>
+        </div>
+        <div class="coiso">
+            <?= Html::a('<span class="glyphicon glyphicon-eye-open"></span><br><span style="color: black">Visualizar Indicativos</span>', ['indicativo/index']) ?>
+        </div>
+        <div class="coiso">
+            <?= Html::a('<span class="glyphicon glyphicon-plus"></span><br><span style="color: black">Criar novo Indicativos</span>', ['indicativo/create']) ?>
+        </div>
     </div>
+
+
 </div>

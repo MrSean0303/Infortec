@@ -2,22 +2,17 @@
 
 namespace backend\controllers;
 
-use common\models\Iva;
-use common\models\Subcategoria;
-use common\models\User;
 use Yii;
-use common\models\Produto;
-use app\models\ProdutoSearch;
-use yii\filters\AccessControl;
+use common\models\Indicativo;
+use backend\models\IndicativoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * ProdutoController implements the CRUD actions for Produto model.
+ * IndicativoController implements the CRUD actions for Indicativo model.
  */
-class ProdutoController extends Controller
+class IndicativoController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -25,28 +20,6 @@ class ProdutoController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                    [
-                        'actions' => ['view', 'update', 'create', 'delete'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            return User::isUserAdmin(Yii::$app->user->identity->username);
-                        }
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -57,12 +30,12 @@ class ProdutoController extends Controller
     }
 
     /**
-     * Lists all Produto models.
+     * Lists all Indicativo models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProdutoSearch();
+        $searchModel = new IndicativoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -72,45 +45,38 @@ class ProdutoController extends Controller
     }
 
     /**
-     * Displays a single Produto model.
+     * Displays a single Indicativo model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Produto model.
+     * Creates a new Indicativo model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Produto();
-        $iva = Iva::find()->all();
-        $subcategoria = Subcategoria::find()->all();
+        $model = new Indicativo();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->imageFile =  UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload() && $model->save()) {
-
-                return $this->redirect(['view', 'id' => $model->idProduto]);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->idIndicativo]);
         }
 
         return $this->render('create', [
-            'model' => $model, 'iva' => $iva, 'subcategoria' => $subcategoria
+            'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Produto model.
+     * Updates an existing Indicativo model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -121,7 +87,7 @@ class ProdutoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idProduto]);
+            return $this->redirect(['view', 'id' => $model->idIndicativo]);
         }
 
         return $this->render('update', [
@@ -130,7 +96,7 @@ class ProdutoController extends Controller
     }
 
     /**
-     * Deletes an existing Produto model.
+     * Deletes an existing Indicativo model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -144,15 +110,15 @@ class ProdutoController extends Controller
     }
 
     /**
-     * Finds the Produto model based on its primary key value.
+     * Finds the Indicativo model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Produto the loaded model
+     * @return Indicativo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Produto::findOne($id)) !== null) {
+        if (($model = Indicativo::findOne($id)) !== null) {
             return $model;
         }
 
