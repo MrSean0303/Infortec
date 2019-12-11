@@ -21,6 +21,11 @@ return [
             'namespace' => 'common\fixtures',
           ],
     ],
+    'modules' => [
+        'api' => [
+            'class' => 'common\modules\Module',
+        ],
+    ],
     'components' => [
         'log' => [
             'targets' => [
