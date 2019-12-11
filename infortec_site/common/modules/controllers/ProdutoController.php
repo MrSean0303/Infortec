@@ -14,6 +14,13 @@ class ProdutoController extends \yii\rest\ActiveController
      * Renders the index view for the module
      * @return string
      */
+    public function actionTotalProdutos()
+    {
+        $model = new $this->modelClass;
+        $recs = $model::find()->all();
+        return ['total' => count($recs)];
+    }
+
     public function actionIndex()
     {
         return $this->render('index');
