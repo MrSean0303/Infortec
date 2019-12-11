@@ -10,7 +10,7 @@ $this->title = 'My Yii Application';
 <div class="site-index">
 
     <h2>Dia: <?=$vendas['data']?></h2>
-    <h4>Income: <?=number_format($vendas['vendas'], 2)?> €</h4>
+    <h4>Income do mes: <?=number_format($vendas['vendas'], 2)?> €</h4>
 
     <div style="height: 100%; width: 100%">
         <div class="coiso">

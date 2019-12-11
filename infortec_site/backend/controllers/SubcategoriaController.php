@@ -2,7 +2,8 @@
 
 namespace backend\controllers;
 
-use app\models\SubcategoriaSearch;
+use backend\models\SubcategoriaSearch;
+use common\models\Categoria;
 use Yii;
 use common\models\Subcategoria;
 use yii\web\Controller;
@@ -64,13 +65,14 @@ class SubcategoriaController extends Controller
     public function actionCreate()
     {
         $model = new Subcategoria();
+        $categoria = Categoria::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->idsubCategoria]);
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model, 'categoria' => $categoria,
         ]);
     }
 
@@ -84,13 +86,14 @@ class SubcategoriaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $categoria = Categoria::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->idsubCategoria]);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 'categoria' => $categoria,
         ]);
     }
 

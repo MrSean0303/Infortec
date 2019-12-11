@@ -7,7 +7,7 @@ use common\models\Subcategoria;
 use common\models\User;
 use Yii;
 use common\models\Produto;
-use app\models\ProdutoSearch;
+use backend\models\ProdutoSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
