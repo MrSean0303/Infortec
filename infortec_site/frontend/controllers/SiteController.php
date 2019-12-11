@@ -17,6 +17,7 @@ use frontend\models\ContactForm;
 use common\models\Produto;
 use common\models\User;
 
+
 /**
  * Site controller
  */
@@ -94,6 +95,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $user = User::find()->where(['id' => Yii::$app->user->id])->one();
             return $this->goBack();
         } else {
             $model->password = '';
