@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "produto".
@@ -27,6 +28,11 @@ use Yii;
 class Produto extends \yii\db\ActiveRecord
 {
     /**
+     * @var UploadedFile
+     */
+    //public $imageFile;
+
+    /**
      * {@inheritdoc}
      */
     public static function tableName()
@@ -40,7 +46,8 @@ class Produto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'fotoProduto', 'descricao', 'descricaoGeral', 'preco', 'quantStock', 'subCategoria_id'], 'required'],
+            //[['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['nome', 'descricao', 'descricaoGeral', 'preco', 'quantStock', 'subCategoria_id'], 'required'],
             [['descricao', 'descricaoGeral'], 'string'],
             [['preco', 'valorDesconto'], 'number'],
             [['quantStock', 'pontos', 'subCategoria_id', 'iva_id'], 'integer'],
@@ -50,6 +57,15 @@ class Produto extends \yii\db\ActiveRecord
             [['subCategoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subcategoria::className(), 'targetAttribute' => ['subCategoria_id' => 'idsubCategoria']],
         ];
     }
+
+    /*
+    public function upload()
+    {
+        $this->imageFile->saveAs(Yii::getAlias('@frontend/web/imagens/' . $this->imageFile->baseName . '.' . $this->imageFile->extension));
+        $this->fotoProduto = $this->imageFile->baseName;
+        return true;
+    }
+    */
 
     /**
      * {@inheritdoc}
