@@ -34,7 +34,7 @@ class m191114_001109_create_indicativo_table extends Migration
 
         $this->insert('indicativo',[
             'idIndicativo' => 2,
-            'icon' => 'icon_França',
+            'icon' => 'icon_Franca',
             'pais' => 'France',
             'indicativo' => '+33',
         ]);

@@ -2,28 +2,43 @@
 
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
-/* @var $utilizador frontend\controllers\UserController */
 /* @var $model frontend\models\UserForm */
 
 ?>
 <h1 style="text-align: center">Dados do Utilizador</h1>
 
 <div class="userIndex_body">
+    <table class="table table" style="margin-top: 2%">
+        <tbody>
+        <tr>
+            <td scope="row">Nome Proprio</td>
+            <td> <?=$model->nome?></td>
+        </tr>
+        <tr>
+            <td scope="row">Username</td>
+            <td><?=$model->username?></td>
+        </tr>
+        <tr>
+            <td scope="row">Email</td>
+            <td><?=$model->email?></td>
+        </tr>
+        <tr>
+            <td scope="row">Nif</td>
+            <td><?=$model->nif?></td>
+        </tr>
+        <tr>
+            <td scope="row">Numero de Pontos</td>
+            <td><?=$model->pontos?></td>
+        </tr>
+        </tbody>
+    </table>
 
-    <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'nome')->textInput(['disabled' => true])?>
-    <?= $form->field($model, 'username')->textInput(['disabled' => true]) ?>
-    <?= $form->field($model, 'email')->textInput(['disabled' => true]) ?>
-    <?= $form->field($model, 'nif')->textInput(['maxlength'=>9,'style'=>'width:25%', 'disabled' => true]) ?>
-    <?= $form->field($model, 'pontos')->textInput(['maxlength'=>9,'style'=>'width:25%', 'disabled' => true]) ?>
-    <?php ActiveForm::end(); ?>
+    <?= Html::a('Alterar password', ['user/change_password'], ['class' => 'btn btn-primary']) ?>
 
     <hr>
-    <?= Html::a('Visualizar Conctatos', ['contacto/index'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Visualizar contactos', ['contacto/index'], ['class' => 'btn btn-success']) ?>
 
-    <?= Html::a('Alterar dados do Utilizado', ['edituser'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Alterar dados do Utilizador', ['edituser'], ['class' => 'btn btn-success']) ?>
 
 </div>

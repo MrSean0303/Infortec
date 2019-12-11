@@ -19,8 +19,9 @@ class UserForm extends \yii\db\ActiveRecord
     public $morada;
     public $pontos;
     public $nif;
-
-
+    public $oldpassword;
+    public $password;
+    public $otherpassword;
 
     /**
      * {@inheritdoc}
@@ -41,6 +42,14 @@ class UserForm extends \yii\db\ActiveRecord
             [['username', 'email', 'nome', 'morada'], 'string', 'max' => 255],
             [['username'], 'unique'],
             [['email'], 'unique'],
+
+            ['password', 'string', 'min' => 6],
+
+            ['otherpassword', 'compare', 'compareAttribute' => 'password', 'message' => 'A palavras passe não coincidem'],
+            ['otherpassword', 'string', 'min' => 6],
+
+            ['oldpassword', 'string', 'min' => 6],
+
         ];
     }
 
@@ -75,7 +84,6 @@ class UserForm extends \yii\db\ActiveRecord
         $utilizador->save();
         return true;
     }
-
 
     /**
      * @return \yii\db\ActiveQuery

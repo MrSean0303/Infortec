@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use common\models\Categoria;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -45,6 +46,7 @@ AppAsset::register($this);
             ['label' => 'Contact', 'url' => ['/site/contact']],
         ],
     ];
+
     $menuItems[] = [
         'label' => 'Categorias',
         'items' => [
@@ -75,7 +77,6 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'Favoritos', 'url' => ['/favorito/index']];
-        $menuItems[] = ['label' => 'dd', 'url' => ['/user/index']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -84,6 +85,8 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
+        $menuItems[] = ['label' => 'Perfil', 'url' => ['/user/index']];
+
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],

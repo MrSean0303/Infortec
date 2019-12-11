@@ -17,6 +17,7 @@ class SignupForm extends Model
     public $nif;
     public $morada;
     public $password;
+    public $otherpassword;
 
     /**
      * {@inheritdoc}
@@ -38,6 +39,11 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
 
+            ['otherpassword', 'required'],
+            ['otherpassword', 'compare', 'compareAttribute' => 'password', 'message' => 'A palavras passe não coincidem'],
+            ['otherpassword', 'string', 'min' => 6],
+
+
             ['nome', 'trim'],
             ['nome', 'required'],
             ['nome', 'string', 'max' => 255],
@@ -49,7 +55,6 @@ class SignupForm extends Model
             ['morada', 'string', 'length' => [4, 255]],
 
             ['nif', 'trim'],
-            ['nif', 'required'],
             ['nif', 'integer'],
             ['nif', 'unique', 'targetClass' => '\common\models\Utilizador'],
         ];

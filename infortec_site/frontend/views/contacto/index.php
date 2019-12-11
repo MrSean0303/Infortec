@@ -9,6 +9,7 @@ use yii\helpers\Url;
 /* @var $contactos ContactoController; */
 
 $this->title = 'Contactos';
+$this->params['breadcrumbs'][] = ['label' => 'Dados User', 'url' => ['user/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="contacto-form-index">
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1><?= Html::encode($this->title) ?></h1>
 
 <?php
-echo Html::a('Create contacto', ['create'], ['class' => 'btn btn-primary']);
+echo Html::a('Criar contacto', ['create'], ['class' => 'btn btn-primary']);
 echo '<p></p>';
 
 if($contactos != null){

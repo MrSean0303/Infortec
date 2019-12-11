@@ -6,10 +6,10 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\ContactoForm */
-
-$this->title = 'Criar novo contacto';
+$this->params['breadcrumbs'][] = ['label' => 'Dados User', 'url' => ['user/index']];
 $this->params['breadcrumbs'][] = ['label' => 'Contactos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = 'Criar';
+
 ?>
 <div class="contacto-form-create">
 

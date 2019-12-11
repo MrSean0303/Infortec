@@ -27,9 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'morada') ?>
 
-                <?= $form->field($model, 'nif') ?>
-
                 <?= $form->field($model, 'password')->passwordInput() ?>
+
+                <?= $form->field($model, 'otherpassword')->passwordInput()->label("Confirmar Password") ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
