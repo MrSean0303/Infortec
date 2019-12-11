@@ -2,6 +2,7 @@
 
 namespace common\modules\controllers;
 
+use yii\filters\auth\HttpBasicAuth;
 use yii\web\Controller;
 
 /**
@@ -10,10 +11,7 @@ use yii\web\Controller;
 class ProdutoController extends \yii\rest\ActiveController
 {
     public $modelClass = 'commmon\models\Produto';
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
+
     public function actionTotalProdutos()
     {
         $model = new $this->modelClass;
@@ -24,5 +22,14 @@ class ProdutoController extends \yii\rest\ActiveController
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => HttpBasicAuth::className(),
+        ];
+        return $behaviors;
     }
 }

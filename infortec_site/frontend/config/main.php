@@ -36,10 +36,24 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        /*'modules' => [
+            'api' => [
+                'class' => 'common\modules\Module',
+            ],
+        ],*/
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-
+            'rules' => [
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'common/modules/controllers/produto',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'GET total' => 'total',
+                    ],
+                ],
+            ],
         ],
     ],
     'params' => $params,
