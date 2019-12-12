@@ -10,9 +10,9 @@ use yii\web\Controller;
  */
 class ProdutoController extends \yii\rest\ActiveController
 {
-    public $modelClass = 'commmon\models\Produto';
+    public $modelClass = 'common\models\Produto';
 
-    public function actionTotalProdutos()
+    public function actionTotal()
     {
         $model = new $this->modelClass;
         $recs = $model::find()->all();
@@ -21,15 +21,16 @@ class ProdutoController extends \yii\rest\ActiveController
 
     public function actionIndex()
     {
-        return $this->render('index');
+        return 1;
+        //return $this->render('index');
     }
 
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
+        /*$behaviors['authenticator'] = [
             'class' => HttpBasicAuth::className(),
-        ];
+        ];*/
         return $behaviors;
     }
 }

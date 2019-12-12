@@ -36,18 +36,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*'modules' => [
-            'api' => [
-                'class' => 'common\modules\Module',
-            ],
-        ],*/
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'common/modules/controllers/produto',
+                    'controller' => 'api/produto',
                     'pluralize' => false,
                     'extraPatterns' => [
                         'GET total' => 'total',
