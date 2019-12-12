@@ -46,6 +46,9 @@ AppAsset::register($this);
             'items' => [
                 ['label' => 'Produtos', 'url' => ['/produto/index']],
                 ['label' => 'Utilizadores', 'url' => ['/user/index']],
+                ['label' => 'Indicativos', 'url' => ['/indicativo/index']],
+                ['label' => 'Categoria', 'url' => ['/categoria/index']],
+                ['label' => 'SubCategoria', 'url' => ['/subcategoria/index']],
             ],
         ];
         $menuItems[] = '<li>'

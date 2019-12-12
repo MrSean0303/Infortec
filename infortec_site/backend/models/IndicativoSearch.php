@@ -4,12 +4,12 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Produto;
+use common\models\Indicativo;
 
 /**
- * ProdutoSearch represents the model behind the search form of `common\models\Produto`.
+ * IndicativoSearch represents the model behind the search form of `common\models\Indicativo`.
  */
-class ProdutoSearch extends Produto
+class IndicativoSearch extends Indicativo
 {
     /**
      * {@inheritdoc}
@@ -17,9 +17,8 @@ class ProdutoSearch extends Produto
     public function rules()
     {
         return [
-            [['idProduto', 'quantStock', 'pontos', 'subCategoria_id', 'iva_id'], 'integer'],
-            [['nome', 'fotoProduto', 'descricao', 'descricaoGeral'], 'safe'],
-            [['preco', 'valorDesconto'], 'number'],
+            [['idIndicativo'], 'integer'],
+            [['icon', 'pais', 'indicativo'], 'safe'],
         ];
     }
 
@@ -41,7 +40,7 @@ class ProdutoSearch extends Produto
      */
     public function search($params)
     {
-        $query = Produto::find();
+        $query = Indicativo::find();
 
         // add conditions that should always apply here
 
@@ -59,19 +58,12 @@ class ProdutoSearch extends Produto
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'idProduto' => $this->idProduto,
-            'preco' => $this->preco,
-            'quantStock' => $this->quantStock,
-            'valorDesconto' => $this->valorDesconto,
-            'pontos' => $this->pontos,
-            'subCategoria_id' => $this->subCategoria_id,
-            'iva_id' => $this->iva_id,
+            'idIndicativo' => $this->idIndicativo,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'fotoProduto', $this->fotoProduto])
-            ->andFilterWhere(['like', 'descricao', $this->descricao])
-            ->andFilterWhere(['like', 'descricaoGeral', $this->descricaoGeral]);
+        $query->andFilterWhere(['like', 'icon', $this->icon])
+            ->andFilterWhere(['like', 'pais', $this->pais])
+            ->andFilterWhere(['like', 'indicativo', $this->indicativo]);
 
         return $dataProvider;
     }

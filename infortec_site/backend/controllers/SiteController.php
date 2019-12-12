@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\Linhavenda;
 use common\models\Venda;
 use phpDocumentor\Reflection\Types\Null_;
 use common\models\User;
@@ -63,10 +64,24 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $vendas = Venda::find()->indexBy('idVenda')->all();
+        $vendas = Venda::find()->indexBy('idVenda')->orderBy(['data'=> SORT_DESC ])->all();
+        $vendasMes['data'] = Yii::$app->formatter->asDate('now', 'dd-MM-yyyy');
+        $vendasMes['vendas'] = 0;
+        $produtosVendidos = 0;
 
+        if ($vendas != null){
+            foreach ($vendas as $venda){
+                if(Yii::$app->formatter->asDate($venda->data, 'MM') == Yii::$app->formatter->asDate('now', 'MM')){
+                    $vendasMes['vendas'] += $venda->totalVenda;
+                    $linhavenda = Linhavenda::find()->where(['venda_id' => $venda->idVenda])->all();
+                    foreach ($linhavenda as $linha){
+                        $produtosVendidos += $linha->quantidade;
+                    }
+                }
+            }
+        }
 
-        return $this->render('index');
+        return $this->render('index', ['vendas' => $vendasMes, 'produtos' => $produtosVendidos]);
     }
 
     /**

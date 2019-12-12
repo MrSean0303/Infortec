@@ -10,7 +10,6 @@ use yii\widgets\ActiveForm;
     $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-
 <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'oldpassword')->passwordInput()->label("Palavra passe anterior")  ?>
