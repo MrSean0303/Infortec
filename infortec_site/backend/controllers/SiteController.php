@@ -1,7 +1,9 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\GerirVendaForm;
 use common\models\Linhavenda;
+use common\models\Produto;
 use common\models\Venda;
 use phpDocumentor\Reflection\Types\Null_;
 use common\models\User;
@@ -69,7 +71,7 @@ class SiteController extends Controller
         $vendasMes['vendas'] = 0;
         $produtosVendidos = 0;
 
-        if ($vendas != null){
+        if (!empty($vendas)){
             foreach ($vendas as $venda){
                 if(Yii::$app->formatter->asDate($venda->data, 'MM') == Yii::$app->formatter->asDate('now', 'MM')){
                     $vendasMes['vendas'] += $venda->totalVenda;
@@ -116,4 +118,6 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
+
 }

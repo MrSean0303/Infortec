@@ -121,12 +121,21 @@ a.desc:after {
 }
 
 .coiso{
-    width: 20%;
-    margin: 2.5rem 0;
+    display: block;
+    margin-right: 5%;
     text-align: center;
 }
 
-.glyphicon.glyphicon-plus {
-    font-size: 75px;
-    color: #2b20f5;
+.cart{
+    display: inline-flex;
+    width: 100%;
+}
+
+.asss{
+    display: flex;
+    margin-top: 5%;
+}
+
+.ww{
+    width: 49%;
 }
