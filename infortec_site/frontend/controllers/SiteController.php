@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\CarrinhoForm;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -283,4 +284,49 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+
+    public function actionAddcarrinho($id){
+        $carrinho = new CarrinhoForm();
+
+        $storedCookie = $carrinho->addToCart($id);
+
+        return $this->redirect(['carrinho']);
+
+    }
+
+    public function actionCarrinho(){
+        $cookies = Yii::$app->request->cookies;
+        $cartCookie = $cookies->getValue('carrinho');
+
+        $cart = null;
+        $valorTotal = 0;
+        if ($cartCookie != null){
+            $carrinho = new CarrinhoForm();
+            $cart = $carrinho->getCart($cartCookie);
+
+            foreach ($cart as $produtos){
+
+                $valorTotal += $produtos->precofinal;
+            }
+        }
+
+        return $this->render('carrinho', ['compras' => $cart, 'total' => $valorTotal]);
+    }
+
+    public function actionDeletecarrinho($id){
+        $carrinho = new CarrinhoForm();
+
+        $carrinho->deleteFromCart($id);
+
+        return $this->redirect(['carrinho']);
+    }
+
+    public function actionVender($venda){
+        $carrinho = new CarrinhoForm();
+
+        $carrinho->deleteFromCart($id);
+
+        return $this->redirect(['carrinho']);
+    }
+
 }

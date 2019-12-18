@@ -34,8 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             'status',
             'role',
-            //'created_at',
-            //'updated_at',
+            //'created_at:datetime',
+            //'updated_at:datetime',
             //'verification_token',
 
             ['class' => 'yii\grid\ActionColumn'],

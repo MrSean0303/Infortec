@@ -9,7 +9,7 @@ $this->title = 'Vendas por Mes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-    <h1 style="text-align: center">Income realizado por mês</h1>
+    <h1 style="text-align: center">Lucro realizado por mês</h1>
 
 <?php
 if ($vendasMes != null){

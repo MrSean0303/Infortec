@@ -57,6 +57,7 @@ AppAsset::register($this);
             ['label' => 'Componentes', 'url' => ['/site/contact']],
         ],
     ];
+    $menuItems[] = ['label' => '<span class="glyphicon glyphicon-shopping-cart"></span>', 'url' => ['/site/carrinho'], 'encode'=>false];
 
     /*
          $menuItems[] = [
@@ -76,7 +77,8 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Favoritos', 'url' => ['/favorito/index']];
+        $menuItems[] = ['label' => '<span class="glyphicon glyphicon-heart"></span>', 'url' => ['/favorito/index'],'encode'=>false];
+        $menuItems[] = ['label' => '<span class="glyphicon glyphicon-user"></span>', 'url' => ['/user/index'], 'encode'=>false];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -85,7 +87,6 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
-        $menuItems[] = ['label' => 'Perfil', 'url' => ['/user/index']];
 
     }
     echo Nav::widget([

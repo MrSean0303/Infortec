@@ -17,7 +17,7 @@ $this->title = $prod->nome;
                 <img class="card-img-top" src=<?=Url::to('@web/Imagens/').$prod->fotoProduto ?> alt="No image">
             </div>
 
-            <div class="naosei">
+            <div class="product_informacaoLadoImagem">
                 <div>
                     <h1><?=$prod->nome?></h1>
                 </div>
@@ -27,7 +27,7 @@ $this->title = $prod->nome;
                         $a = $prod->preco - $prod->valorDesconto;
                         $prod->preco = number_format($prod->preco, 2, ',', ' ');
                         $a = number_format($a, 2, ',', ' ');
-                        echo '<h4><strike>'. $prod->preco.'</strike>'. ' ' .$a .' €'.'</h4>';
+                        echo '<h4><strike>'. $prod->preco.'€</strike>'. ' ' .$a .' €'.'</h4>';
                     }else {
                         $prod->preco = number_format($prod->preco, 2, ',', ' ');
                         echo '<h4>'.$prod->preco.' €</h4>';
@@ -37,23 +37,33 @@ $this->title = $prod->nome;
                 <div>
                     <p><?=$prod->descricao?></p>
                 </div>
-                <div>
-                    <?php
-
-                    switch ($isfavorito){
-                        case 'favorito':
-                            echo Html::a('<span class="glyphicon glyphicon-heart" style="color:red"></span>', [ 'favorito/deletefavorito', 'id' => $prod->idProduto]);
-                            break;
-                        case 'notFavorito':
-                            echo Html::a('<span class="glyphicon glyphicon-heart" style="color: gray"></span>', [ 'favorito/newfavorito', 'id' => $prod->idProduto]);
-                            break;
-                        case 'Guest':
-                            echo Html::a('<span class="glyphicon glyphicon-heart" style="color: gray"></span>', [ 'site/login']);
-                            break;
-                        default:
-                            echo 'Erro';
-                    }
+                <div style="display: flex; width: 100%">
+                    <div style="font-size: 200%">
+                        <?php
+                        switch ($isfavorito){
+                            case 'favorito':
+                                echo Html::a('<span class="glyphicon glyphicon-heart" style="color:red"></span>', [ 'favorito/deletefavorito', 'id' => $prod->idProduto]);
+                                break;
+                            case 'notFavorito':
+                                echo Html::a('<span class="glyphicon glyphicon-heart" style="color: gray"></span>', [ 'favorito/newfavorito', 'id' => $prod->idProduto]);
+                                break;
+                            case 'Guest':
+                                echo Html::a('<span class="glyphicon glyphicon-heart" style="color: gray"></span>', [ 'site/login']);
+                                break;
+                            default:
+                                echo 'Erro';
+                        }
+                            ?>
+                    </div>
+                    <div style="text-align: right;margin-left: auto">
+                        <?php
+                        if($prod->quantStock >0){
+                            echo Html::a('<span class="glyphicon glyphicon-shopping-cart"></span> Adicionar ao Carrinho', ['site/addcarrinho', 'id' =>$prod->idProduto], ['class' => 'btn btn-success']);
+                        }else{
+                           echo Html::a('<span class="glyphicon glyphicon-remove"></span> Produto sem Stock', ['view' , 'id' =>$prod->idProduto], ['class' => 'btn btn-danger']);
+                        }
                         ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,18 +71,16 @@ $this->title = $prod->nome;
             <h4>Informações Gerais do produto</h4>
             <?php
                 if(is_array($prod->descricaoGeral)) {
-            ?>
-            <ul>
-                <?php
+                    echo '<ul>';
                     for ($i = 0; $i < count($prod->descricaoGeral); $i++) {
                         echo '<li>' . $prod->descricaoGeral[$i] . '</li>';
                     }
-                ?>
-            </ul>
-            <?php
-                }else{
+                    echo '</ul>';
+                }else if ($prod->descricaoGeral != null){
                     echo '<p>' . $prod->descricaoGeral . '</p>';
 
+                }else{
+                    echo '<h4>Este produto não possui informação geral.</h4>';
                 }
                 ?>
         </div>
