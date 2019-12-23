@@ -2,7 +2,9 @@
 namespace frontend\controllers;
 
 use frontend\models\CarrinhoForm;
+use frontend\models\LinhavendaForm;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\VendaForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -321,12 +323,57 @@ class SiteController extends Controller
         return $this->redirect(['carrinho']);
     }
 
-    public function actionVender($venda){
+    public function actionVender($total){
+
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
+
+        $cookies = Yii::$app->request->cookies;
+        $cartCookie = $cookies->getValue('carrinho');
+
         $carrinho = new CarrinhoForm();
+        $cart = $carrinho->getCart($cartCookie);
 
-        $carrinho->deleteFromCart($id);
+        $newcookies = Yii::$app->response->cookies;
+        $newcookies->remove('carrinho');
 
-        return $this->redirect(['carrinho']);
+        $venda = new VendaForm();
+        $venda->totalVenda = $total;
+        $venda->utilizador_id = Yii::$app->user->id;
+
+        $linhacompras = null;
+        foreach ($cart as $produto){
+            if ($linhacompras == null){
+                $linhacompras[] = new LinhavendaForm();
+                $linhacompras[0]->quantidade = $produto->quantidade;
+
+                if ($produto->valorDesconto != null){
+                    $produto->preco = $produto->preco - $produto->valorDesconto;
+                }
+
+                $linhacompras[0]->preco = $produto->preco;
+                $linhacompras[0]->venda_id = $venda->idVenda;
+            }else{
+                $linha= new LinhavendaForm();
+                $linha->quantidade = $produto->quantidade;
+
+                if ($produto->valorDesconto != null){
+                    $produto->preco = $produto->preco - $produto->valorDesconto;
+                }
+
+                $linha->preco = $produto->preco;
+                $linha->venda_id = $venda->idVenda;
+
+                array_push($linhacompras, $linha);
+            }
+        }
+
+
+        var_dump($linhacompras);
+        die();
+
+        return $this->render(['confirmarvenda', ['carrinho' => $todo]]);
     }
 
 }

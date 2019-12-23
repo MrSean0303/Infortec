@@ -58,10 +58,9 @@ if ($compras != null) {
         </tbody>
     </table>
     <?php
-    $valores[0] = $compras;
-    $valores[1] = $total;
-
-    echo Html::a('Finalizar Compra', ['site/vender', 'venda' => $valores]);
+    echo '<div style="text-align: right">';
+    echo Html::a('Finalizar Compra', ['site/vender', 'total' => $total], ['class' => 'btn btn-success']);
+    echo '</div>';
 
 }else{
     echo '<h4 style="text-align: center">Ainda não tem produtos adicionados ao carinho.</h4>';
