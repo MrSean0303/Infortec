@@ -2,6 +2,8 @@
 
 namespace frontend\models;
 
+use common\models\Utilizador;
+
 use Yii;
 
 /**

@@ -3,6 +3,8 @@
 namespace frontend\models;
 
 use Yii;
+use common\models\Produto;
+use common\models\Venda;
 
 /**
  * This is the model class for table "linhavenda".

@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Utilizador;
 use frontend\models\CarrinhoForm;
 use frontend\models\LinhavendaForm;
 use frontend\models\ResendVerificationEmailForm;
@@ -19,6 +20,8 @@ use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\Produto;
 use common\models\User;
+use DateTime;
+use DateTimeZone;
 
 
 /**
@@ -340,40 +343,34 @@ class SiteController extends Controller
 
         $venda = new VendaForm();
         $venda->totalVenda = $total;
-        $venda->utilizador_id = Yii::$app->user->id;
 
-        $linhacompras = null;
+        $venda->data = Date( 'Y-m-d h:i:s ');
+
+        $utilizador = Utilizador::find()->where(['user_id' => Yii::$app->user->id])->one();
+
+        $venda->utilizador_id = $utilizador->user_id;
+        $venda->save();
+
         foreach ($cart as $produto){
-            if ($linhacompras == null){
-                $linhacompras[] = new LinhavendaForm();
-                $linhacompras[0]->quantidade = $produto->quantidade;
+            $linha = new LinhavendaForm();
 
-                if ($produto->valorDesconto != null){
-                    $produto->preco = $produto->preco - $produto->valorDesconto;
-                }
+            $prod = Produto::find()->where(['idProduto' => $produto->idProduto])->one();
+            $linha->produto_id = $prod->idProduto;
+            $linha->quantidade = $produto->quantidade;
 
-                $linhacompras[0]->preco = $produto->preco;
-                $linhacompras[0]->venda_id = $venda->idVenda;
-            }else{
-                $linha= new LinhavendaForm();
-                $linha->quantidade = $produto->quantidade;
 
-                if ($produto->valorDesconto != null){
-                    $produto->preco = $produto->preco - $produto->valorDesconto;
-                }
-
-                $linha->preco = $produto->preco;
-                $linha->venda_id = $venda->idVenda;
-
-                array_push($linhacompras, $linha);
+            if ($produto->valorDesconto != null){
+                $produto->preco = $produto->preco - $produto->valorDesconto;
             }
+
+            $linha->preco = $produto->preco;
+            $linha->venda_id = $venda->idVenda;
+            $linha->save();
         }
 
 
-        var_dump($linhacompras);
-        die();
-
-        return $this->render(['confirmarvenda', ['carrinho' => $todo]]);
+        Yii::$app->session->setFlash('success', 'Compra feita com sucesso');
+        return $this->goHome();
     }
 
 }
