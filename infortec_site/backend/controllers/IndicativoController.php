@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\IndicativoForm;
 use Yii;
 use common\models\Indicativo;
 use backend\models\IndicativoSearch;
@@ -64,10 +65,13 @@ class IndicativoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Indicativo();
+        $model = new IndicativoForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idIndicativo]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->createInciativo();
+            $ind = Indicativo::find()->where(["pais" => $model->pais])->one();
+
+            return $this->redirect(['view', 'id' => $ind->idIndicativo]);
         }
 
         return $this->render('create', [
@@ -124,4 +128,6 @@ class IndicativoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
 }

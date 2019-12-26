@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'icon')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'iconImage')->fileInput() ?>
 
     <?= $form->field($model, 'pais')->textInput(['maxlength' => true]) ?>
 

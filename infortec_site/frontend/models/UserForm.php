@@ -37,7 +37,7 @@ class UserForm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username','email', 'nome', 'morada'], 'required'],
+            [['username','email', 'nome'], 'required'],
             [['nif', 'pontos'], 'integer'],
             [['username', 'email', 'nome', 'morada'], 'string', 'max' => 255],
             [['username'], 'unique'],

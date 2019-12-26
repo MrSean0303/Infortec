@@ -67,6 +67,8 @@ class ContactoForm extends Model
         $contacto->utilizador_id = Yii::$app->user->id;
         $contacto->indicativo_id = $this->indicativo_id;
 
+
+
         $contacto->save();
 
         return true;

@@ -2,7 +2,10 @@
 
 namespace backend\models;
 
+use common\models\Indicativo;
 use Yii;
+use yii\web\UploadedFile;
+
 
 /**
  * This is the model class for table "indicativo".
@@ -14,11 +17,13 @@ use Yii;
  *
  * @property Contacto[] $contactos
  */
+
 class IndicativoForm extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
+    public $iconImage;
     public static function tableName()
     {
         return 'indicativo';
@@ -33,6 +38,7 @@ class IndicativoForm extends \yii\db\ActiveRecord
             [['icon', 'pais', 'indicativo'], 'required'],
             [['icon', 'pais', 'indicativo'], 'string', 'max' => 255],
             [['icon'], 'unique'],
+            [['iconImage'], 'file'],
             [['pais'], 'unique'],
             [['indicativo'], 'unique'],
         ];
@@ -58,4 +64,21 @@ class IndicativoForm extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Contacto::className(), ['indicativo_id' => 'idIndicativo']);
     }
+
+    public function createInciativo(){
+        $this->iconImage = UploadedFile::getInstance($this, 'iconImage');
+
+        $indicativo = new Indicativo();
+        $indicativo->icon = $this->iconImage->baseName.".".$this->iconImage->extension;
+        $indicativo->pais = $this->pais;
+        $indicativo->indicativo = $this->indicativo;
+        $indicativo->save();
+
+        if ($this->iconImage) {
+            $this->iconImage->saveAs(Yii::getAlias('@frontend/web/imagens/icons/') . $this->iconImage->baseName . '.' . $this->iconImage->extension);
+        }
+
+    }
+
 }
+
