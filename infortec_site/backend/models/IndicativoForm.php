@@ -2,7 +2,6 @@
 
 namespace backend\models;
 
-use common\models\Indicativo;
 use Yii;
 use yii\web\UploadedFile;
 
@@ -38,7 +37,7 @@ class IndicativoForm extends \yii\db\ActiveRecord
             [['icon', 'pais', 'indicativo'], 'required'],
             [['icon', 'pais', 'indicativo'], 'string', 'max' => 255],
             [['icon'], 'unique'],
-            [['iconImage'], 'file'],
+            [['iconImage'], 'file', 'extensions' => 'jpg, png'],
             [['pais'], 'unique'],
             [['indicativo'], 'unique'],
         ];
@@ -65,17 +64,21 @@ class IndicativoForm extends \yii\db\ActiveRecord
         return $this->hasMany(Contacto::className(), ['indicativo_id' => 'idIndicativo']);
     }
 
-    public function createInciativo(){
+    public function uploadImage(){
         $this->iconImage = UploadedFile::getInstance($this, 'iconImage');
 
-        $indicativo = new Indicativo();
-        $indicativo->icon = $this->iconImage->baseName.".".$this->iconImage->extension;
-        $indicativo->pais = $this->pais;
-        $indicativo->indicativo = $this->indicativo;
-        $indicativo->save();
+        $this->icon = $this->iconImage->baseName.".".$this->iconImage->extension;
 
         if ($this->iconImage) {
             $this->iconImage->saveAs(Yii::getAlias('@frontend/web/imagens/icons/') . $this->iconImage->baseName . '.' . $this->iconImage->extension);
+        }
+
+    }
+
+    public function deleteImage(){
+
+        if (file_exists(Yii::getAlias('@frontend/web/imagens/icons/') . $this->icon)){
+            unlink(Yii::getAlias('@frontend/web/imagens/icons/') . $this->icon);
         }
 
     }
