@@ -39,14 +39,15 @@ class VendasController extends Controller{
                         } else {
                             foreach ($vendasPorMes as $vendames) {
                                 if ($vendames->mes == $i) {
+                                    $vendames->quantidade += $totalprodutos;
                                     $vendames->precoProduto += $venda->totalVenda;
                                     $monthAlreadyExists = true;
                                 }
                             }
                             if ($monthAlreadyExists == false) {
                                 $vend = new GerirVendaForm();
-                                $vend->quantidade += $totalprodutos;
-                                $vend->precoProduto += $venda->totalVenda;
+                                $vend->quantidade = $totalprodutos;
+                                $vend->precoProduto = $venda->totalVenda;
                                 $vend->mes = $i;
 
                                 $dateObj   = DateTime::createFromFormat('!m', $i);
