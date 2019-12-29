@@ -67,9 +67,8 @@ class IndicativoForm extends \yii\db\ActiveRecord
     public function uploadImage(){
         $this->iconImage = UploadedFile::getInstance($this, 'iconImage');
 
-        $this->icon = $this->iconImage->baseName.".".$this->iconImage->extension;
-
         if ($this->iconImage) {
+            $this->icon = $this->iconImage->baseName.".".$this->iconImage->extension;
             $this->iconImage->saveAs(Yii::getAlias('@frontend/web/imagens/icons/') . $this->iconImage->baseName . '.' . $this->iconImage->extension);
         }
 
@@ -79,6 +78,18 @@ class IndicativoForm extends \yii\db\ActiveRecord
 
         if (file_exists(Yii::getAlias('@frontend/web/imagens/icons/') . $this->icon)){
             unlink(Yii::getAlias('@frontend/web/imagens/icons/') . $this->icon);
+        }
+    }
+
+    public function changeImage(){
+        $this->iconImage = UploadedFile::getInstance($this, 'iconImage');
+
+        if ($this->iconImage) {
+            if (file_exists(Yii::getAlias('@frontend/web/imagens/icons/') . $this->icon)){
+                unlink(Yii::getAlias('@frontend/web/imagens/icons/') . $this->icon);
+            }
+            $this->icon = $this->iconImage->baseName.".".$this->iconImage->extension;
+            $this->iconImage->saveAs(Yii::getAlias('@frontend/web/imagens/icons/') . $this->iconImage->baseName . '.' . $this->iconImage->extension);
         }
 
     }

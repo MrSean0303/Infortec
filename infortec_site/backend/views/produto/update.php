@@ -4,6 +4,8 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Produto */
+/* @var $subcategoria \backend\controllers\ProdutoController */
+/* @var $iva \backend\controllers\ProdutoController */
 
 $this->title = 'Update Produto: ' . $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Produtos', 'url' => ['index']];
@@ -15,7 +17,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model, 'iva' => $iva, 'subcategoria' => $subcategoria
     ]) ?>
 
 </div>

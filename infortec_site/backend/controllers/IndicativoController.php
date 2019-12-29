@@ -103,8 +103,7 @@ class IndicativoController extends Controller
         $model->pais = $indicativo->pais;
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->deleteImage();
-            $model->uploadImage();
+            $model->changeImage();
 
             $indicativo->idIndicativo = $model->idIndicativo;
             $indicativo->indicativo = $model->indicativo;
@@ -130,12 +129,13 @@ class IndicativoController extends Controller
      */
     public function actionDelete($id)
     {
-
         $indicativo = $this->findModel($id);
-        $model = new IndicativoForm();
 
-        $model->icon = $indicativo->icon;
-        $model->deleteImage();
+        if ($indicativo->icon != null) {
+            $model = new ProdutoForm();
+            $model->icon = $indicativo->icon;
+            $model->deleteImage();
+        }
 
         $indicativo->delete();
 
