@@ -52,4 +52,9 @@ class Categoria extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Subcategoria::className(), ['categoria_id' => 'idCategoria']);
     }
+
+    public function getProdutos()
+    {
+        return $this->hasMany(Produto::className(), ['subCategoria_id' => 'idsubCategoria'])->via('subcategorias');
+    }
 }

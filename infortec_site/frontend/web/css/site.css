@@ -181,11 +181,11 @@ a.desc:after {
 }
 
 
-.testeREE{
+.buttonNoDec{
     text-decoration: none !important;
 }
 
-.testeREE :hover{
+.buttonNoDec :hover{
     text-decoration: none !important;
 }
 

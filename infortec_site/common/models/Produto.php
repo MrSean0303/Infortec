@@ -118,4 +118,9 @@ class Produto extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Subcategoria::className(), ['idsubCategoria' => 'subCategoria_id']);
     }
+
+    public function getCategoria()
+    {
+        return $this->hasOne(Categoria::className(), ['idCategoria' => 'categoria_id'])->via('subCategoria');
+    }
 }

@@ -14,6 +14,31 @@ use yii\bootstrap\ButtonDropdown;
 $this->title = 'Infortec';
 ?>
 <div class="site-index">
+    <?php
+    $nome = Yii::$app->getRequest()->getQueryParam('nome');
+    $subCategoria = Yii::$app->getRequest()->getQueryParam('subcat');
+
+/*
+    $id = Categoria::find()->where(['nome' => $nome])->one()->idCategoria;
+
+    $subcategorias = Categoria::findOne($id)->subcategorias; ?>
+
+        <?php
+        $items = [];
+
+        foreach ($subcategorias as $subcat)     {
+                $items[] = ['label' => $subcat->nome, 'url' => ['/site/subcategoria', 'subcat' => $subcat->nome], 'options'=> ['class'=>'buttonNoDec']];
+            }
+       ?>
+
+    <?php
+
+    echo ButtonDropdown::widget([
+        'label' => 'Sub-categorias',
+        'dropdown' => [
+            'items' => $items,
+        ],
+    ]); */?>
 
     <div class="allCards">
 

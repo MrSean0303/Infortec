@@ -2,8 +2,10 @@
 
 /* @var $this yii\web\View */
 /* @var $prod SiteController*/
+/* @var $subcate SiteController*/
 
 use common\models\Produto;
+use common\models\Subcategoria;
 use frontend\controllers\SiteController;
 use phpDocumentor\Reflection\Types\Null_;
 use yii\helpers\Html;
@@ -14,11 +16,39 @@ use yii\bootstrap\ButtonDropdown;
 $this->title = 'Infortec';
 ?>
 <div class="site-index">
+    <?php
+    $nome = Yii::$app->getRequest()->getQueryParam('nome');
+
+        $id = Categoria::find()->where(['nome' => $nome])->one()->idCategoria;
+        $subcategorias = Categoria::findOne($id)->subcategorias;
+
+        $items = [];
+        foreach ($subcategorias as $subcat)     {
+                $items[] = ['label' => $subcat->nome, 'url' => ['/site/categorias', 'nome' => $nome, 'subcate' => $subcat->nome], 'options'=> ['class'=>'buttonNoDec']];
+            }
+    ?>
+            <h2  style="margin-bottom: 30px;"><?php
+                if($subcate != 'null')
+                    echo $nome . ": " . $subcate;
+                else
+                    echo $nome;
+                ?></h2>
+    <?php
+    echo ButtonDropdown::widget([
+        'label' => 'Sub-categorias',
+        'dropdown' => [
+            'items' => $items,
+        ],
+    ]); ?>
 
     <div class="allCards">
 
         <?php
-
+        if($subcate != 'null')
+        {
+            $id = Subcategoria::find()->where(['nome' => $subcate])->one()->idsubCategoria;
+            $prod = Subcategoria::findOne($id)->produtos;
+        }
         foreach ($prod as $produtos) {
             $preco = number_format($produtos->preco, 2, ',', ' ');
             ?>

@@ -15,7 +15,11 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\Produto;
+use common\models\Categoria;
+use common\models\Subcategoria;
 use common\models\User;
+use yii\db\Query;
+use yii\data\ActiveDataProvider;
 
 
 /**
@@ -141,16 +145,21 @@ class SiteController extends Controller
         }
     }
 
-    public function actionCategoriafixo()
-    {
-        $products = Produto::find()->where(['like', 'subCategoria_id', '2'])->all();
-        return $this->render('index', ['prod' => $products]);
+    public function actionCategorias($nome, $subcate){
+
+            $id = Categoria::find()->where(['nome' => $nome])->one()->idCategoria;
+            $products = Categoria::findOne($id)->produtos;
+
+        return $this->render('categorias', ['prod' => $products, 'subcate' => $subcate]);
+
     }
 
-    public function actionCategoriaportatil()
+    public function actionSubcategoria($subcat)
     {
-        $products = Produto::find()->where(['like', 'subCategoria_id', '1'])->all();
-        return $this->render('index', array('prod' => $products));
+        $id = Subcategoria::find()->where(['nome' => $subcat])->one()->idsubCategoria;
+        $products = Subcategoria::findOne($id)->produtos;
+
+        return $this->render('subcategorias', ['prod' => $products]);
     }
 
     public function actionSearchproducts(){

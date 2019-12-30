@@ -46,16 +46,15 @@ AppAsset::register($this);
             ['label' => 'Contact', 'url' => ['/site/contact']],
         ],
     ];
-
+    $categorias = Categoria::find()->all();
+    $items = [];
+    foreach ($categorias as $cat)
+    {
+        $items[] = ['label' => $cat->nome, 'url' => ['/site/categorias', 'nome' => $cat->nome, 'subcate' => 'null'], 'options'=> ['class'=>'buttonNoDec']];
+    }
     $menuItems[] = [
         'label' => 'Categorias',
-        'items' => [
-            ['label' => 'Computadores',
-                'items' => [['label' => 'Fixo', 'url' => ['/site/categoriafixo']],
-                    ['label' => 'Portatil', 'url' => ['/site/categoriaportatil']]], 'url' => ['/site/index'], 'options'=> ['class'=>'testeREE']],
-            '<li class="divider"></li>',
-            ['label' => 'Componentes', 'url' => ['/site/contact']],
-        ],
+        'items' => $items,
     ];
 
     /*
