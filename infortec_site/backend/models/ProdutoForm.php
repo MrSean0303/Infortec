@@ -1,8 +1,12 @@
 <?php
 
-namespace common\models;
+namespace app\models;
 
+use common\models\Iva;
+use common\models\Subcategoria;
+use phpDocumentor\Reflection\Types\Null_;
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "produto".
@@ -24,12 +28,12 @@ use Yii;
  * @property Iva $iva
  * @property Subcategoria $subCategoria
  */
-class Produto extends \yii\db\ActiveRecord
+class ProdutoForm extends \yii\db\ActiveRecord
 {
-
     /**
      * {@inheritdoc}
      */
+    public $imageProduto;
     public static function tableName()
     {
         return 'produto';
@@ -41,7 +45,8 @@ class Produto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'descricao', 'descricaoGeral', 'preco', 'quantStock', 'subCategoria_id'], 'required'],
+            [['imageProduto'], 'file', 'extensions' => 'jpg, png'],
+            [['nome', 'fotoProduto', 'descricao', 'descricaoGeral', 'preco', 'quantStock', 'subCategoria_id'], 'required'],
             [['descricao', 'descricaoGeral'], 'string'],
             [['preco', 'valorDesconto'], 'number'],
             [['quantStock', 'pontos', 'subCategoria_id', 'iva_id'], 'integer'],
@@ -51,15 +56,6 @@ class Produto extends \yii\db\ActiveRecord
             [['subCategoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subcategoria::className(), 'targetAttribute' => ['subCategoria_id' => 'idsubCategoria']],
         ];
     }
-
-    /*
-    public function upload()
-    {
-        $this->imageFile->saveAs(Yii::getAlias('@frontend/web/imagens/' . $this->imageFile->baseName . '.' . $this->imageFile->extension));
-        $this->fotoProduto = $this->imageFile->baseName;
-        return true;
-    }
-    */
 
     /**
      * {@inheritdoc}
@@ -113,8 +109,34 @@ class Produto extends \yii\db\ActiveRecord
         return $this->hasOne(Subcategoria::className(), ['idsubCategoria' => 'subCategoria_id']);
     }
 
-    public function getCategoria()
-    {
-        return $this->hasOne(Categoria::className(), ['idCategoria' => 'categoria_id'])->via('subCategoria');
+    public function uploadImage(){
+        $this->imageProduto = UploadedFile::getInstance($this, 'imageProduto');
+
+        if ($this->imageProduto) {
+            $this->fotoProduto = $this->imageProduto->baseName.".".$this->imageProduto->extension;
+            $this->imageProduto->saveAs(Yii::getAlias('@frontend/web/imagens/') . $this->imageProduto->baseName . '.' . $this->imageProduto->extension);
+        }
+
+    }
+
+    public function deleteImage(){
+
+        if (file_exists(Yii::getAlias('@frontend/web/imagens/') . $this->fotoProduto)){
+            unlink(Yii::getAlias('@frontend/web/imagens/') . $this->fotoProduto);
+        }
+    }
+
+    public function changeImage(){
+        $this->imageProduto = UploadedFile::getInstance($this, 'imageProduto');
+
+        if ($this->imageProduto) {
+            if (file_exists(Yii::getAlias('@frontend/web/imagens/') . $this->fotoProduto)){
+                unlink(Yii::getAlias('@frontend/web/imagens/') . $this->fotoProduto);
+            }
+
+            $this->fotoProduto = $this->imageProduto->baseName.".".$this->imageProduto->extension;
+            $this->imageProduto->saveAs(Yii::getAlias('@frontend/web/imagens/') . $this->imageProduto->baseName . '.' . $this->imageProduto->extension);
+        }
+
     }
 }

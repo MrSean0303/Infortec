@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use app\models\ProdutoForm;
 use common\models\Iva;
 use common\models\Subcategoria;
 use common\models\User;
@@ -92,16 +93,26 @@ class ProdutoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Produto();
+        $model = new ProdutoForm();
         $iva = Iva::find()->all();
         $subcategoria = Subcategoria::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->imageFile =  UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload() && $model->save()) {
+            $model->uploadImage();
+            $produto = new Produto();
+            $produto->nome = $model->nome;
+            $produto->fotoProduto = $model->fotoProduto;
+            $produto->preco = $model->preco;
+            $produto->quantStock = $model->quantStock;
+            $produto->descricao = $model->descricao;
+            $produto->descricaoGeral = $model->descricaoGeral;
+            $produto->valorDesconto = $model->valorDesconto;
+            $produto->pontos = $model->pontos;
+            $produto->iva_id = $model->iva_id;
+            $produto->subCategoria_id = $model->subCategoria_id;
+            $produto->save();
 
-                return $this->redirect(['view', 'id' => $model->idProduto]);
-            }
+            return $this->redirect(['view', 'id' => $produto->idProduto]);
         }
 
         return $this->render('create', [
@@ -118,14 +129,46 @@ class ProdutoController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $produto = $this->findModel($id);
+        $model = new ProdutoForm();
+        $iva = Iva::find()->all();
+        $subcategoria = Subcategoria::find()->all();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idProduto]);
+        $model->idProduto = $produto->idProduto;
+        $model->nome = $produto->nome;
+        $model->fotoProduto = $produto->fotoProduto;
+        $model->preco = $produto->preco;
+        $model->quantStock = $produto->quantStock;
+        $model->descricao = $produto->descricao;
+        $model->descricaoGeral = $produto->descricaoGeral;
+        $model->valorDesconto = $produto->valorDesconto;
+        $model->pontos = $produto->pontos;
+        $model->iva_id = $produto->iva_id;
+        $model->subCategoria_id = $produto->subCategoria_id;
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->fotoProduto != null) {
+                $model->changeImage();
+                $produto->fotoProduto = $model->fotoProduto;
+            }
+
+            $produto->nome = $model->nome;
+            $produto->preco = $model->preco;
+            $produto->quantStock = $model->quantStock;
+            $produto->descricao = $model->descricao;
+            $produto->descricaoGeral = $model->descricaoGeral;
+            $produto->valorDesconto = $model->valorDesconto;
+            $produto->pontos = $model->pontos;
+            $produto->iva_id = $model->iva_id;
+            $produto->subCategoria_id = $model->subCategoria_id;
+
+            $produto->save();
+
+            return $this->redirect(['view', 'id' =>  $produto->idProduto]);
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model, 'iva' => $iva, 'subcategoria' => $subcategoria
         ]);
     }
 
@@ -138,7 +181,15 @@ class ProdutoController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $produto = $this->findModel($id);
+
+        if ($produto->fotoProduto != null) {
+            $model = new ProdutoForm();
+            $model->fotoProduto = $produto->fotoProduto;
+            $model->deleteImage();
+        }
+
+        $produto->delete();
 
         return $this->redirect(['index']);
     }

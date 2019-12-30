@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use backend\models\IndicativoForm;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use Yii;
 use common\models\Indicativo;
 use backend\models\IndicativoSearch;
@@ -64,10 +66,18 @@ class IndicativoController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Indicativo();
+        $model = new IndicativoForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idIndicativo]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->uploadImage();
+
+            $indicativo = new Indicativo();
+            $indicativo->icon = $model->icon;
+            $indicativo->indicativo = $model->indicativo;
+            $indicativo->pais = $model->pais;
+            $indicativo->save();
+
+            return $this->redirect(['view', 'id' => $indicativo->idIndicativo]);
         }
 
         return $this->render('create', [
@@ -84,10 +94,25 @@ class IndicativoController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $indicativo = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idIndicativo]);
+        $model = new IndicativoForm();
+        $model->idIndicativo = $indicativo->idIndicativo;
+        $model->indicativo = $indicativo->indicativo;
+        $model->icon = $indicativo->icon;
+        $model->pais = $indicativo->pais;
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->changeImage();
+
+            $indicativo->idIndicativo = $model->idIndicativo;
+            $indicativo->indicativo = $model->indicativo;
+            $indicativo->icon = $model->icon;
+            $indicativo->pais = $model->pais;
+            $indicativo->save();
+
+
+            return $this->redirect(['view', 'id' => $indicativo->idIndicativo]);
         }
 
         return $this->render('update', [
@@ -104,7 +129,15 @@ class IndicativoController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $indicativo = $this->findModel($id);
+
+        if ($indicativo->icon != null) {
+            $model = new ProdutoForm();
+            $model->icon = $indicativo->icon;
+            $model->deleteImage();
+        }
+
+        $indicativo->delete();
 
         return $this->redirect(['index']);
     }
@@ -124,4 +157,6 @@ class IndicativoController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
 }

@@ -38,7 +38,7 @@ class Utilizador extends \yii\db\ActiveRecord
         return [
             [['nome', 'cargo'], 'required'],
             [['nif', 'cargo', 'numPontos', 'user_id'], 'integer'],
-            [['nome', 'morada'], 'string', 'max' => 255],
+            [['nome', 'morada'], 'string', 'max' => 255, 'min' => 1],
             [['nif'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];

@@ -66,13 +66,7 @@ class UserController extends Controller
             $user->setPassword($model->password);
             $user->save();
             Yii::$app->session->setFlash('success', 'Palavra passe alterada com sucesso');
-            $model ->username = $user->username;
-            $model->nome = $utilizador->nome;
-            $model->email = $user->email;
-            $model->morada = $utilizador->morada;
-            $model->nif = $utilizador->nif;
-            $model->pontos = $utilizador->numPontos;
-            return $this->render('index', ['model' => $model]);
+            return $this->redirect('index');
         }
 
         return $this->render('changepassword', ['model' => $model]);

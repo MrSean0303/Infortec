@@ -54,6 +54,7 @@ class ProdutoController extends Controller
             $isFavorito = "Guest";
         }
 
+
         return $this->render('view', [
             'prod' => $produtoSelecionado, 'isfavorito' => $isFavorito,
         ]);

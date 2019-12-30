@@ -13,15 +13,15 @@ use yii\widgets\ActiveForm;
 
 <div class="produto-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <!-- $form->field($model, 'imageFile')->fileInput() -->
-
-    <?= $form->field($model, 'fotoProduto')->textInput() ?>
+    <?= $form->field($model, 'imageProduto')->fileInput() ?>
 
     <?= $form->field($model, 'descricao')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'descricaoGeral')->textarea(['rows' => 2]) ?>
 
     <?= $form->field($model, 'preco')->textInput(['maxlength' => true]) ?>
 

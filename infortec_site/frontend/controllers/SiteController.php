@@ -1,7 +1,11 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Utilizador;
+use frontend\models\CarrinhoForm;
+use frontend\models\LinhavendaForm;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\VendaForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
@@ -18,6 +22,8 @@ use common\models\Produto;
 use common\models\Categoria;
 use common\models\Subcategoria;
 use common\models\User;
+use DateTime;
+use DateTimeZone;
 use yii\db\Query;
 use yii\data\ActiveDataProvider;
 
@@ -292,4 +298,88 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+
+    public function actionAddcarrinho($id){
+        $carrinho = new CarrinhoForm();
+
+        $storedCookie = $carrinho->addToCart($id);
+
+        return $this->redirect(['carrinho']);
+
+    }
+
+    public function actionCarrinho(){
+        $cookies = Yii::$app->request->cookies;
+        $cartCookie = $cookies->getValue('carrinho');
+
+        $cart = null;
+        $valorTotal = 0;
+        if ($cartCookie != null){
+            $carrinho = new CarrinhoForm();
+            $cart = $carrinho->getCart($cartCookie);
+
+            foreach ($cart as $produtos){
+
+                $valorTotal += $produtos->precofinal;
+            }
+        }
+
+        return $this->render('carrinho', ['compras' => $cart, 'total' => $valorTotal]);
+    }
+
+    public function actionDeletecarrinho($id){
+        $carrinho = new CarrinhoForm();
+
+        $carrinho->deleteFromCart($id);
+
+        return $this->redirect(['carrinho']);
+    }
+
+    public function actionVender($total){
+
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect(['site/login']);
+        }
+
+        $cookies = Yii::$app->request->cookies;
+        $cartCookie = $cookies->getValue('carrinho');
+
+        $carrinho = new CarrinhoForm();
+        $cart = $carrinho->getCart($cartCookie);
+
+        $newcookies = Yii::$app->response->cookies;
+        $newcookies->remove('carrinho');
+
+        $venda = new VendaForm();
+        $venda->totalVenda = $total;
+
+        $venda->data = Date( 'Y-m-d h:i:s ');
+
+        $utilizador = Utilizador::find()->where(['user_id' => Yii::$app->user->id])->one();
+
+        $venda->utilizador_id = $utilizador->user_id;
+        $venda->save();
+
+        foreach ($cart as $produto){
+            $linha = new LinhavendaForm();
+
+            $prod = Produto::find()->where(['idProduto' => $produto->idProduto])->one();
+            $linha->produto_id = $prod->idProduto;
+            $linha->quantidade = $produto->quantidade;
+
+
+            if ($produto->valorDesconto != null){
+                $produto->preco = $produto->preco - $produto->valorDesconto;
+            }
+
+            $linha->preco = $produto->preco;
+            $linha->venda_id = $venda->idVenda;
+            $linha->save();
+        }
+
+
+        Yii::$app->session->setFlash('success', 'Compra feita com sucesso');
+        return $this->goHome();
+    }
+
 }

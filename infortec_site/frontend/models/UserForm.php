@@ -37,7 +37,7 @@ class UserForm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username','email', 'nome', 'morada'], 'required'],
+            [['username','email', 'nome'], 'required'],
             [['nif', 'pontos'], 'integer'],
             [['username', 'email', 'nome', 'morada'], 'string', 'max' => 255],
             [['username'], 'unique'],
@@ -73,6 +73,8 @@ class UserForm extends \yii\db\ActiveRecord
     {
         $user = new User();
         $utilizador = new Utilizador();
+        $user = User::find()->where(['id' => Yii::$app->user->id])->one();
+        $utilizador = Utilizador::find()->where(['idUtilizador' => $user->id])->one();
 
         $utilizador->nome = $this->nome;
         $user->username = $this->username;
@@ -81,6 +83,7 @@ class UserForm extends \yii\db\ActiveRecord
         $utilizador->nif = $this->nif;
 
         $utilizador->user_id = $user->id;
+        $user->save();
         $utilizador->save();
         return true;
     }

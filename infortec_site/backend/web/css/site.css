@@ -120,7 +120,7 @@ a.desc:after {
     outline: none;
 }
 
-.coiso{
+.item{
     display: block;
     margin-right: 5%;
     text-align: center;
@@ -131,11 +131,11 @@ a.desc:after {
     width: 100%;
 }
 
-.asss{
+.seccao{
     display: flex;
     margin-top: 5%;
 }
 
-.ww{
+.selecao{
     width: 49%;
 }

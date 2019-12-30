@@ -33,12 +33,13 @@ class VendasController extends Controller{
                             $vendasPorMes[0]->precoProduto = $venda->totalVenda;
                             $vendasPorMes[0]->mes = $i;
 
-                            $dateObj   = DateTime::createFromFormat('!m', $i);
+                            $dateObj  = DateTime::createFromFormat('!m', $i);
                             $vendasPorMes[0]->produto_id = $dateObj->format('F');
 
                         } else {
                             foreach ($vendasPorMes as $vendames) {
                                 if ($vendames->mes == $i) {
+                                    $vendames->quantidade += $totalprodutos;
                                     $vendames->precoProduto += $venda->totalVenda;
                                     $monthAlreadyExists = true;
                                 }
@@ -46,7 +47,7 @@ class VendasController extends Controller{
                             if ($monthAlreadyExists == false) {
                                 $vend = new GerirVendaForm();
                                 $vend->quantidade = $totalprodutos;
-                                $vend->precoProduto += $venda->totalVenda;
+                                $vend->precoProduto = $venda->totalVenda;
                                 $vend->mes = $i;
 
                                 $dateObj   = DateTime::createFromFormat('!m', $i);
@@ -60,6 +61,7 @@ class VendasController extends Controller{
                 }
             }
         }
+
         //Organizar array por meses
         for ($j = 0; $j < count($vendasPorMes) ; $j++) {
             for ($k = $j + 1; $k < count($vendasPorMes); $k++) {

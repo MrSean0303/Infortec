@@ -87,6 +87,7 @@ class ContactoController extends Controller
         $model['contacto']->utilizador_id = $user->id;
 
         if ($model['contacto']->load(Yii::$app->request->post()) && $model['contacto']->create()) {
+
             return $this->redirect(['index']);
         }
 
