@@ -64,4 +64,51 @@ class Favorito extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Utilizador::className(), ['idUtilizador' => 'utilizador_id']);
     }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        $id= $this->idFavorito;
+        $myObj=new \stdClass();
+        $myObj->id=$id;
+        $myJSON = json_encode($myObj);
+        $this->FazPublish("DELETE",$myJSON);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        //Obter dados do registo em causa
+        $id=$this->idFavorito;
+        $produto_id=$this->produto_id;
+        $utilizador_id=$this->utilizador_id;
+
+        $myObj=new \stdClass();
+        $myObj->id=$id;
+        $myObj->produto_id=$produto_id;
+        $myObj->utilizador_id=$utilizador_id;
+
+        $myJSON = json_encode($myObj);
+        if($insert)
+            $this->FazPublish("INSERT",$myJSON);
+        else
+            $this->FazPublish("UPDATE",$myJSON);
+    }
+
+    public function FazPublish($canal,$msg)
+    {
+        $server = "127.0.0.1";
+        $port = 1883;
+        $username = ""; // set your username
+        $password = ""; // set your password
+        $client_id = "phpMQTT-publisher"; // unique!
+        $mqtt = new \app\mosquitto\phpMQTT($server, $port, $client_id);
+        if ($mqtt->connect(true, NULL, $username, $password))
+        {
+            $mqtt->publish($canal, $msg, 0);
+            $mqtt->close();
+        }
+        else { file_put_contents("debug.output","Time out!"); }
+    }
 }
