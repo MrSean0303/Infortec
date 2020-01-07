@@ -27,8 +27,8 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => $this->text()->notNull(),
             'preco' => $this->decimal(10,2)->notNull(),
             'quantStock' => $this->integer()->notNull(),
-            'valorDesconto' => $this->decimal(10,2),
-            'pontos' => $this->integer(),
+            'valorDesconto' => $this->decimal(10,2)->notNull()->defaultValue(0),
+            'pontos' => $this->integer()->notNull()->defaultValue(0),
             'subCategoria_id' => $this->integer()->notNull(),
             'iva_id' => $this->integer(),
         ],$tableOptions);
@@ -59,8 +59,8 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'AMD Ryzen 3 2300X | Nox Infinity Atom RGB | Asus Prime A320M-K | Sapphire Radeon RX 470 4GB Bulk | 8GB RAM | SSD 240GB',
             'preco' => 1999.99,
             'quantStock' => 5454,
-            'valorDesconto' => null,
-            'pontos' => null,
+            'valorDesconto' => 0,
+            'pontos' => 0,
             'subCategoria_id' => 1,
             'iva_id' => 1,
             ]);
@@ -73,8 +73,8 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Intel Core i5-8400 | Free DOS | 8GB RAM | GeForce GTX 1050 Ti | SSD 256GB + HDD 1TB',
             'preco' => 699.00,
             'quantStock' => 54,
-            'valorDesconto' => null,
-            'pontos' => null,
+            'valorDesconto' => 0,
+            'pontos' => 0,
             'subCategoria_id' => 1,
             'iva_id' => 1,
         ]);
@@ -87,8 +87,6 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Intel Celeron J4005 | Windows 10 | 4GB RAM | Intel UHD Graphics 600 | HDD 1TB',
             'preco' => 429.00,
             'quantStock' => 54,
-            'valorDesconto' => null,
-            'pontos' => null,
             'subCategoria_id' => 1,
             'iva_id' => 1,
         ]);
@@ -101,8 +99,6 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'AMD Ryzen 3 2200G | Free DOS | 8GB RAM | Radeon Vega 8 | SSD 512GB',
             'preco' => 429.00,
             'quantStock' => 2030,
-            'valorDesconto' => null,
-            'pontos' => null,
             'subCategoria_id' => 1,
             'iva_id' => 1,
         ]);
@@ -115,7 +111,6 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Intel Core i5-7400 | W10 Home | 8GB RAM | GeForce GTX 1050 | SSD 256GB',
             'preco' => 1299.00,
             'quantStock' => 5454,
-            'valorDesconto' => null,
             'pontos' => 120,
             'subCategoria_id' => 1,
             'iva_id' => 1,
@@ -129,8 +124,6 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Intel Core i5-8400 | Free DOS | 8GB RAM | GeForce GTX 1050 Ti | HDD 1TB',
             'preco' => 649.00,
             'quantStock' => 5454,
-            'valorDesconto' => null,
-            'pontos' => null,
             'subCategoria_id' => 1,
             'iva_id' => 1,
         ]);
@@ -143,8 +136,7 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Intel Core i5-7400 | Free DOS | 8GB RAM | GeForce GTX 1050 Ti | HDD 1TB',
             'preco' => 799.00,
             'quantStock' => 5454,
-            'valorDesconto' => null,
-            'pontos' => null,
+            'valorDesconto' => 99,
             'subCategoria_id' => 1,
             'iva_id' => 1,
         ]);
@@ -157,8 +149,6 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Intel Core i5-8400 | W10 Home | 8GB RAM | GeForce GTX 1050 Ti | HDD 1TB',
             'preco' => 899.00,
             'quantStock' => 5454,
-            'valorDesconto' => null,
-            'pontos' => null,
             'subCategoria_id' => 1,
             'iva_id' => 1,
         ]);
@@ -171,8 +161,6 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Cooler Master',
             'preco' => 15.90,
             'quantStock' => 5454,
-            'valorDesconto' => null,
-            'pontos' => null,
             'subCategoria_id' => 5,
             'iva_id' => 1,
         ]);
@@ -185,8 +173,7 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Gigabyte',
             'preco' => 42.50,
             'quantStock' => 5454,
-            'valorDesconto' => null,
-            'pontos' => null,
+            'valorDesconto' => 0.5,
             'subCategoria_id' => 3,
             'iva_id' => 1,
         ]);
@@ -199,8 +186,6 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Longshine',
             'preco' => 14.90,
             'quantStock' => 5454,
-            'valorDesconto' => null,
-            'pontos' => null,
             'subCategoria_id' => 3,
             'iva_id' => 1,
         ]);
@@ -213,8 +198,6 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Kingston | DDR3-1600 MHz',
             'preco' => 20.20,
             'quantStock' => 5454,
-            'valorDesconto' => null,
-            'pontos' => null,
             'subCategoria_id' => 4,
             'iva_id' => 1,
         ]);
@@ -227,8 +210,6 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Motherboard AMD AM4 inspirada em projeto arquitetónico, com Core Boost, DDR4 Boost, Turbo M.2 e USB 3.2 Gen1.',
             'preco' => 47.90,
             'quantStock' => 5454,
-            'valorDesconto' => null,
-            'pontos' => null,
             'subCategoria_id' => 6,
             'iva_id' => 1,
         ]);
@@ -241,8 +222,6 @@ class m191113_164827_create_produto_table extends Migration
             'descricaoGeral' => 'Intel Core i3-7020U | Boot-up Linux | 8GB RAM | FHD 60Hz | UHD Graphics 620 | SSD 256GB',
             'preco' => 349.00,
             'quantStock' => 1235,
-            'valorDesconto' => null,
-            'pontos' => null,
             'subCategoria_id' => 2,
             'iva_id' => 1,
         ]);

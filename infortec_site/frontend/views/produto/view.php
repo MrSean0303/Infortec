@@ -23,7 +23,7 @@ $this->title = $prod->nome;
                 </div>
                 <div>
                     <?php
-                    if ($prod->valorDesconto != null){
+                    if ($prod->valorDesconto > 0 ){
                         $a = $prod->preco - $prod->valorDesconto;
                         $prod->preco = number_format($prod->preco, 2, ',', ' ');
                         $a = number_format($a, 2, ',', ' ');

@@ -20,8 +20,8 @@ $this->title = 'Infortec';
         <?php
 
         foreach ($prod as $produtos) {
-            $pecoAtual =null;
-            if ($produtos->valorDesconto != null){
+            $pecoAtual = null;
+            if ($produtos->valorDesconto > 0){
                 $pecoAtual = $produtos->preco - $produtos->valorDesconto;
                 $pecoAtual = number_format($pecoAtual, 2, ',', ' ');
             }
