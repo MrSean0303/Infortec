@@ -26,6 +26,21 @@ class m130524_201442_init extends Migration
             'updated_at' => $this->integer()->notNull(),
         ], $tableOptions);
 
+        //Pass = admin123
+        $this->insert('user',[
+            'id' => 1,
+            'username' => 'admin',
+            'auth_key' => 'EvmZ8MuvssUqsrzwn-W4KLP6UcJ8h0oI',
+            'password_hash' => '$2y$13$2yQlB031hqOoqOmJ4s6Bfundxmmw0/DkkouhW3M8RtmUZyQQDZ556',
+            'password_reset_token' => null,
+            'email' => 'infortec.ipl@gmail.com',
+
+            'status' => 10,
+            'role' => 2,
+            'created_at' => 1578569191,
+            'updated_at' => 1578569191,
+        ]);
+
     }
 
     public function down()

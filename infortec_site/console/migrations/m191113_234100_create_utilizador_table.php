@@ -23,7 +23,6 @@ class m191113_234100_create_utilizador_table extends Migration
             'nome' => $this->string()->notNull(),
             'nif' => $this->integer()->unique(),
             'morada' => $this->string(),
-            'cargo' => $this->integer()->notNull(),
             'numPontos' => $this->integer(),
             'user_id' => $this->integer(),
         ], $tableOptions);
@@ -36,6 +35,15 @@ class m191113_234100_create_utilizador_table extends Migration
             'id',
             'CASCADE'
         );
+
+        $this->insert('utilizador',[
+            'idUtilizador' => 1,
+            'nome' => 'Oadmin',
+            'nif' => null,
+            'morada' => null,
+            'numPontos' => 0,
+            'user_id' => 1,
+        ]);
     }
 
     /**
