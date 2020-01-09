@@ -36,8 +36,8 @@ class Utilizador extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nome', 'cargo'], 'required'],
-            [['nif', 'cargo', 'numPontos', 'user_id'], 'integer'],
+            [['nome'], 'required'],
+            [['nif', 'numPontos', 'user_id'], 'integer'],
             [['nome', 'morada'], 'string', 'max' => 255, 'min' => 1],
             [['nif'], 'unique'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -54,7 +54,6 @@ class Utilizador extends \yii\db\ActiveRecord
             'nome' => 'Nome',
             'nif' => 'Nif',
             'morada' => 'Morada',
-            'cargo' => 'Cargo',
             'numPontos' => 'Num Pontos',
             'user_id' => 'User ID',
         ];
