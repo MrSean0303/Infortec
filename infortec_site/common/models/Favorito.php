@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\mosquitto\phpMQTT;
 use Yii;
 
 /**
@@ -103,7 +104,7 @@ class Favorito extends \yii\db\ActiveRecord
         $username = ""; // set your username
         $password = ""; // set your password
         $client_id = "phpMQTT-publisher"; // unique!
-        $mqtt = new \app\mosquitto\phpMQTT($server, $port, $client_id);
+        $mqtt = new phpMQTT($server, $port, $client_id);
         if ($mqtt->connect(true, NULL, $username, $password))
         {
             $mqtt->publish($canal, $msg, 0);
