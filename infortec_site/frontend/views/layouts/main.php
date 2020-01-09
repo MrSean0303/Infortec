@@ -39,13 +39,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']]];
-    $menuItems[] = [
-        'label' => 'Sobre Nós',
-        'items' => [
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-        ],
-    ];
+
     $categorias = Categoria::find()->all();
     $items = [];
     foreach ($categorias as $cat)
@@ -56,6 +50,15 @@ AppAsset::register($this);
         'label' => 'Categorias',
         'items' => $items,
     ];
+
+    $menuItems[] = [
+        'label' => 'Sobre Nós',
+        'items' => [
+            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Contact', 'url' => ['/site/contact']],
+        ],
+    ];
+
     $menuItems[] = ['label' => '<span class="glyphicon glyphicon-shopping-cart"></span>', 'url' => ['/site/carrinho'], 'encode'=>false];
 
     /*

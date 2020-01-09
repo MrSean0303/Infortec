@@ -32,7 +32,7 @@ class FavoritoController extends Controller
         $newFavorito = Favorito::findOne(['utilizador_id' => Yii::$app->user->id, 'produto_id' => $id,]);
         $newFavorito->delete();
         $this->redirect(['produto/view', 'id' => $id]);
-        }
+    }
 
     public function actionNewfavorito($id){
         $newFavorito = new Favorito();

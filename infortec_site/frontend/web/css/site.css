@@ -170,15 +170,33 @@ a.desc:after {
 /* View Produtos */
 
 .img-viewProduto{
-    width: 30%;
-    float:left;
+    width: 35%;
+    float:right;
 }
 
 .product_informacaoLadoImagem{
-    width: 66%;
+    width: 60%;
     margin-left: 4%;
-    float:right;
+    float:left;
 }
+.product_preco{
+    text-align: left;
+    color: orange;
+    font-size: 24px;
+}
+
+.product_favoritos_text{
+    color: gray;
+    font-size: 15px;
+}
+
+.product_descricao{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+}
+
+/*Fim da View Produtos*/
 
 
 .buttonNoDec{
@@ -208,4 +226,5 @@ a.desc:after {
 .product-show:hover .product-card .product-title{
     color: #75a1ff;
 }
+
 
