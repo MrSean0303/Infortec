@@ -101,8 +101,8 @@ class Favorito extends \yii\db\ActiveRecord
     {
         $server = "127.0.0.1";
         $port = 1883;
-        $username = ""; // set your username
-        $password = ""; // set your password
+        $username = "";
+        $password = "";
         $client_id = "phpMQTT-publisher"; // unique!
         $mqtt = new phpMQTT($server, $port, $client_id);
         if ($mqtt->connect(true, NULL, $username, $password)) {

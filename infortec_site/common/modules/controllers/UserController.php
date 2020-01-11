@@ -123,6 +123,14 @@ class UserController extends \yii\rest\ActiveController
         $user = $this->auth($username, $password);
         if ($user != null) {
             $user->setPassword(yii::$app->request->getBodyParam("password"));
+
+            if ($user->save())
+            {
+                return $user;
+            }
+            else{
+                Throw new BadRequestHttpException("Erro na mudança de password");
+            }
         } else {
             Throw new BadRequestHttpException("password incorreta");
         }
