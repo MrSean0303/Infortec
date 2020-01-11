@@ -58,9 +58,6 @@ class UserController extends Controller
     {
         $model = new UserForm();
         $user = User::findIdentity(Yii::$app->user->id);
-        $utilizador = Utilizador::find()->where(['user_id' => $user->id])->one();
-
-
 
         if ($model->load(Yii::$app->request->post()) && $user->validatePassword($model->oldpassword)){
             $user->setPassword($model->password);
