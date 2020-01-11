@@ -36,7 +36,7 @@ class UserController extends \yii\rest\ActiveController
     public function actions()
     {
         $actions = parent::actions();
-        unset($actions['index']);
+        unset($actions['index'], $actions['view']);
         return $actions;
     }
 
@@ -65,8 +65,25 @@ class UserController extends \yii\rest\ActiveController
         }else{
             Throw new BadRequestHttpException("User não encontrado");
         }
+    }
 
+    public function actionView($id){
+        $request = yii::$app->request;
+        $credentials = $request->getAuthCredentials();
+        $username = $credentials[0];
+        $password = $credentials[1];
 
+        $user = $this->auth($username, $password);
+        if ($user != null){
+            if ($user->id == $id){
+                return $this->actionIndex();
+            }
+            Throw new BadRequestHttpException("User não tem premissões de acesso");
+
+        }else{
+            Throw new BadRequestHttpException("User não encontrado");
+
+        }
     }
 
     public function actionEdit()
@@ -78,7 +95,7 @@ class UserController extends \yii\rest\ActiveController
 
         $user = $this->auth($username, $password);
         if ($user != null){
-            $user = User::find()->where(['id' =>yii::$app->user->id ])->one();
+            $user = User::find()->where(['id' => $user->id ])->one();
             $utilizador = Utilizador::find()->where(['user_id' => $user->id])->one();
 
             $user->email = yii::$app->request->getBodyParam("email");
@@ -87,7 +104,7 @@ class UserController extends \yii\rest\ActiveController
             $utilizador->nome = yii::$app->request->getBodyParam("nome");
 
             if ($user->save() && $utilizador->save()){
-                return 1;
+                return $user;
             }else{
                 Throw new BadRequestHttpException("Erro na edição do Utilizador");
             }
@@ -124,14 +141,14 @@ class UserController extends \yii\rest\ActiveController
         $user->setPassword(yii::$app->request->getBodyParam("password"));
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-        $utilizador->cargo = 0;
         $utilizador->numPontos = 0;
+
         if ($user->save()){
             $utilizador->user_id = $user->id;
             if (!$utilizador->save()){
                 Throw new BadRequestHttpException("Erro na criação do Utilizador");
             }
-            return $user->id;
+            return $user;
         }else{
             Throw new BadRequestHttpException("Erro na criação do User");
         }

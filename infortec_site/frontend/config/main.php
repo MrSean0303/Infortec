@@ -70,6 +70,12 @@ return [
                     'controller' => 'api/venda',
                     'pluralize' => false,
                 ],
+
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/linhavenda',
+                    'pluralize' => false,
+                ],
             ],
         ],
     ],

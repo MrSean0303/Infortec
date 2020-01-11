@@ -2,13 +2,11 @@
 
 namespace common\modules\controllers;
 
-use common\models\Linhavenda;
 use common\models\User;
 use common\models\Venda;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
-use yii\web\Controller;
 use yii;
 
 /**
@@ -32,7 +30,7 @@ class VendaController extends \yii\rest\ActiveController
             }
         ];
 
-        $behaviors['verbs'] =[
+        $behaviors['verbs'] = [
             'class' => VerbFilter::className(),
             'actions' => [
                 'Createvenda' => 'POST',
@@ -43,45 +41,42 @@ class VendaController extends \yii\rest\ActiveController
         return $behaviors;
     }
 
-    public function actionIndex()
+    public function actions()
     {
-        return 1;
-        //return $this->render('index');
+        $actions = parent::actions();
+        unset($actions['index'], $actions['view']);
+        return $actions;
     }
 
-    public function actionCreatevenda(){
+
+    public function actionIndex()
+    {
+        $vend = Venda::find()->where(['utilizador_id' => yii::$app->user->id])->all();
+        return $vend;
+
+    }
+
+    public function actionView($id)
+    {
+        $vend = Venda::find()->where(['idVenda' => $id, 'utilizador_id' => yii::$app->user->id])->all();
+        if ($vend != null){
+            return $vend;
+        }
+        Throw new BadRequestHttpException("Venda não exite");
+
+    }
+
+    public function actionCreatevenda()
+    {
         $venda = new Venda();
 
         $venda->totalVenda = yii::$app->request->getBodyParam("total");
-        $venda->data = Date( 'Y-m-d h:i:s ');
+        $venda->data = Date('Y-m-d h:i:s ');
         $venda->utilizador_id = yii::$app->user->id;
-        if ($venda->save()){
+        if ($venda->save()) {
             return $venda;
-        }else{
+        } else {
             Throw new BadRequestHttpException("Erro na criação da Venda");
         }
     }
-
-    public function actionLinha(){
-        $linha = new Linhavenda();
-
-        $linha->quantidade = yii::$app->request->getBodyParam("quantidade");
-        $linha->preco = yii::$app->request->getBodyParam("preco");
-        $linha->venda_id = yii::$app->request->getBodyParam("venda_id");
-        $linha->produto_id = yii::$app->request->getBodyParam("produto_id");
-
-        if ($linha->preco == 0){
-            $linha->isPontos = 100;
-        }else{
-            $linha->isPontos = null;
-        }
-
-        if ($linha->save()){
-            return $linha;
-        }else{
-            Throw new BadRequestHttpException("Erro na criação da linha de venda");
-        }
-    }
-
-
 }
