@@ -39,7 +39,7 @@ class FavoritoController extends \yii\rest\ActiveController
     public function actions()
     {
         $actions = parent::actions();
-        unset($actions['index']);
+        unset($actions['index'], $actions['view']);
         return $actions;
     }
 
@@ -47,8 +47,17 @@ class FavoritoController extends \yii\rest\ActiveController
     {
         $fav = Favorito::find()->where(['utilizador_id' =>yii::$app->user->id])->all();
 
-
         return $fav;
+    }
+
+    public function actionView($id)
+    {
+        $fav = Favorito::find()->where(['idFavorito'=> $id, 'utilizador_id' =>yii::$app->user->id])->one();
+        if ($fav != null){
+            return $fav;
+        }
+        Throw new BadRequestHttpException("Favorito não exite");
+
     }
 
     public function actionAdd($idProduto){
