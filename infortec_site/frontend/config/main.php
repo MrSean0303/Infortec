@@ -48,9 +48,6 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/produto',
                     'pluralize' => false,
-                    'extraPatterns' => [
-                        'GET total' => 'total',
-                    ],
                 ],
 
                 [
@@ -63,6 +60,9 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => 'api/user',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'PUT edit' => 'edit',
+                    ],
                 ],
 
                 [
