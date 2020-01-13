@@ -60,7 +60,8 @@ class FavoritoController extends \yii\rest\ActiveController
 
     }
 
-    public function actionAdd($idProduto){
+    public function actionAdd(){
+        $idProduto = yii::$app->request->getBodyParam("idProduto");
         $favExist = Favorito::find()->where( ['produto_id' => $idProduto, 'utilizador_id' => yii::$app->user->id])->exists();
 
         if (!$favExist) {
@@ -77,8 +78,8 @@ class FavoritoController extends \yii\rest\ActiveController
         }
     }
 
-    public function actionRemove($idProduto){
-
+    public function actionRemove(){
+        $idProduto = yii::$app->request->getBodyParam("idProduto");
         $favExist = Favorito::find()->where( ['produto_id' => $idProduto, 'utilizador_id' => yii::$app->user->id])->exists();
 
         if ($favExist){

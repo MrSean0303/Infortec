@@ -92,6 +92,15 @@ class SiteController extends Controller
         return $this->render('index', ['prod' => $produtos]);
     }
 
+    public function actionPromocoes($nome)
+    {
+        var_dump($nome);
+        die();
+        $produtos = Produto::find()->where(['>','valorDesconto', 0])->indexBy('idProduto')->all();
+
+        return $this->render('index', ['prod' => $produtos]);
+    }
+
     /**
      * Logs in a user.
      *
@@ -160,19 +169,19 @@ class SiteController extends Controller
 
     }
 
-    public function actionSubcategoria($subcat)
+    /*public function actionSubcategoria($subcat)
     {
         $id = Subcategoria::find()->where(['nome' => $subcat])->one()->idsubCategoria;
         $products = Subcategoria::findOne($id)->produtos;
 
         return $this->render('subcategorias', ['prod' => $products]);
-    }
+    }*/
 
     public function actionSearchproducts(){
 
         $searchInput = Yii::$app->request->get('pesquisa');
         $products = Produto::find()->where(['like', 'nome', $searchInput])->all();
-        return $this->render('index', array('prod' => $products));
+        return $this->render('search_products', array('prod' => $products));
     }
 
     /**

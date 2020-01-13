@@ -50,18 +50,39 @@ $this->title = 'Infortec';
             $prod = Subcategoria::findOne($id)->produtos;
         }
         foreach ($prod as $produtos) {
+            $precoAtual = null;
+            if ($produtos->valorDesconto > 0) {
+                $precoAtual = $produtos->preco - $produtos->valorDesconto;
+                $precoAtual = number_format($precoAtual, 2, ',', ' ');
+            }
+
             $preco = number_format($produtos->preco, 2, ',', ' ');
             ?>
             <div class="product-show card" style="width:24%;">
-            <?= Html::a('
-                     <img class="card-img-top" src="' .Url::to('@web/Imagens/').$produtos->fotoProduto. '" alt="Card image cap">
+                <?php
+                if ($precoAtual != null) {
+                    echo Html::a('
+                     <img class="card-img-top" src="' . Url::to('@web/Imagens/') . $produtos->fotoProduto . '" alt="Card image cap">
                     <div class="product-card card-body">
-                        <h4 class="product-title card-title">'. $produtos->nome . '</h4>
-                        <h4 class="card-subtitle mb-2 text-muted" style="text-align: center !important;">'. $preco .' €</h4>
-                        <p class="product-specs card-text">'. $produtos->descricaoGeral .'</p>
+                        <h4 class="product-title card-title">' . $produtos->nome . '</h4>
+                        <h4 class="card-subtitle mb-2 text-muted" style="text-align: center !important;"><strike>' . $preco . '€</strike> ' . $precoAtual . ' €</h4>
+                        <p class="product-specs card-text">' . $produtos->descricaoGeral . '</p>
                     </div>
-                ', [ 'produto/view', 'id' => $produtos->idProduto])
+                ', ['produto/view', 'id' => $produtos->idProduto]);
+                    $precoAtual = null;
+                } else {
                 ?>
+                <?= Html::a('
+                     <img class="card-img-top" src="' . Url::to('@web/Imagens/') . $produtos->fotoProduto . '" alt="Card image cap">
+                    <div class="product-card card-body">
+                        <h4 class="product-title card-title">' . $produtos->nome . '</h4>
+                        <h4 class="card-subtitle mb-2 text-muted" style="text-align: center !important;">' . $preco . ' €</h4>
+                        <p class="product-specs card-text">' . $produtos->descricaoGeral . '</p>
+                    </div>
+                ', ['produto/view', 'id' => $produtos->idProduto])
+                ?>
+                <?php
+            }?>
 
             </div>
             <?php

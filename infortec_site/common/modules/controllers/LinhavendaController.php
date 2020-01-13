@@ -31,7 +31,7 @@ class LinhavendaController extends \yii\rest\ActiveController
         $behaviors['verbs'] = [
             'class' => VerbFilter::className(),
             'actions' => [
-                'add' => 'POST'
+                'Add' => 'POST'
             ],
         ];
 
