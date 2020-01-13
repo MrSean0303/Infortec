@@ -34,7 +34,6 @@ class VendaController extends \yii\rest\ActiveController
             'class' => VerbFilter::className(),
             'actions' => [
                 'Createvenda' => 'POST',
-                'Linha' => 'POST'
             ],
         ];
 

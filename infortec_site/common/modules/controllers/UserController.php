@@ -20,12 +20,11 @@ class UserController extends \yii\rest\ActiveController
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-
         $behaviors['verbs'] =[
             'class' => VerbFilter::className(),
             'actions' => [
                 'Edit' => 'PUT',
-                'Changepassword' => 'PUT',
+                'Change' => 'PUT',
                 'Registar' => 'POST'
             ],
         ];
@@ -113,7 +112,7 @@ class UserController extends \yii\rest\ActiveController
         }
     }
 
-    public function actionChangepassword()
+    public function actionChange()
     {
         $request = yii::$app->request;
         $credentials = $request->getAuthCredentials();
@@ -131,8 +130,6 @@ class UserController extends \yii\rest\ActiveController
             else{
                 Throw new BadRequestHttpException("Erro na mudança de password");
             }
-        } else {
-            Throw new BadRequestHttpException("password incorreta");
         }
     }
 

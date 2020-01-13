@@ -61,13 +61,12 @@ class FavoritoController extends \yii\rest\ActiveController
     }
 
     public function actionAdd(){
-        $idProduto = yii::$app->request->getBodyParam("idProduto");
-        $favExist = Favorito::find()->where( ['produto_id' => $idProduto, 'utilizador_id' => yii::$app->user->id])->exists();
+        $favExist = Favorito::find()->where( ['produto_id' => yii::$app->request->getBodyParam("idProduto"), 'utilizador_id' => yii::$app->user->id])->exists();
 
         if (!$favExist) {
             $fav = new Favorito();
             $fav->utilizador_id = \Yii::$app->user->id;
-            $fav->produto_id = $idProduto;
+            $fav->produto_id = yii::$app->request->getBodyParam("idProduto");
             if ($fav->save()) {
                 return $fav;
             } else {
@@ -79,11 +78,11 @@ class FavoritoController extends \yii\rest\ActiveController
     }
 
     public function actionRemove(){
-        $idProduto = yii::$app->request->getBodyParam("idProduto");
-        $favExist = Favorito::find()->where( ['produto_id' => $idProduto, 'utilizador_id' => yii::$app->user->id])->exists();
+
+        $favExist = Favorito::find()->where( ['produto_id' => yii::$app->request->getBodyParam("idProduto"), 'utilizador_id' => yii::$app->user->id])->exists();
 
         if ($favExist){
-            $fav = Favorito::find()->where(['produto_id' => $idProduto, 'utilizador_id' => Yii::$app->user->id])->one();
+            $fav = Favorito::find()->where(['produto_id' => yii::$app->request->getBodyParam("idProduto"), 'utilizador_id' => Yii::$app->user->id])->one();
             $fav->delete();
             return $this->actionIndex();
         }else{
