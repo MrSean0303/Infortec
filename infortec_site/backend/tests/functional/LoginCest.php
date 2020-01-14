@@ -45,18 +45,9 @@ class LoginCest
         $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
         $I->see('Logout (erau)', 'form button[type=submit]');
 
-        //$I->see('Please fill out the following fields to login:');
-
-        //$I->click('login-button', 'form button[type=submit]');
-
-
-        /*$controllerl = Yii::$app->controller;
-        $homecheker = $controllerl->id.'/'.$controllerl->action->id;
-        var_dump($homecheker);
-        die();*/
-
-        //$I->see('Logout (erau)', 'form button[type=submit]');
-        //$I->dontSeeLink('Login');
-        //$I->dontSeeLink('Signup');
+        $I->dontSeeLink('Login');
+        $I->dontSeeLink('Signup');
     }
+
+
 }

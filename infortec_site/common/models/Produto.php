@@ -52,15 +52,6 @@ class Produto extends \yii\db\ActiveRecord
         ];
     }
 
-    /*
-    public function upload()
-    {
-        $this->imageFile->saveAs(Yii::getAlias('@frontend/web/imagens/' . $this->imageFile->baseName . '.' . $this->imageFile->extension));
-        $this->fotoProduto = $this->imageFile->baseName;
-        return true;
-    }
-    */
-
     /**
      * {@inheritdoc}
      */

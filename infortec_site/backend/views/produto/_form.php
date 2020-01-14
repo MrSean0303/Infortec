@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 
 <div class="produto-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'product-form']); ?>
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
