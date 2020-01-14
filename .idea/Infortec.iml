@@ -16,6 +16,7 @@
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/doctrine/instantiator" />
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/ezyang/htmlpurifier" />
+      <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/facebook/webdriver" />
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/fzaninotto/faker" />
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/guzzlehttp/psr7" />
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/myclabs/deep-copy" />
@@ -55,6 +56,7 @@
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/symfony/finder" />
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/symfony/polyfill-ctype" />
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/symfony/process" />
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/infortec_site/vendor/yiisoft/yii2" />

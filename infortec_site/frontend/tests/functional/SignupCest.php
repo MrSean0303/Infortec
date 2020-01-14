@@ -42,9 +42,12 @@ class SignupCest
     public function signupSuccessfully(FunctionalTester $I)
     {
         $I->submitForm($this->formId, [
+            'SignupForm[nome]' => 'tester',
             'SignupForm[username]' => 'tester',
             'SignupForm[email]' => 'tester.email@example.com',
+            'SignupForm[morada]' => 'SignupForm[morada]',
             'SignupForm[password]' => 'tester_password',
+            'SignupForm[otherpassword]' => 'tester_password',
         ]);
 
         $I->seeRecord('common\models\User', [

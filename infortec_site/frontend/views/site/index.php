@@ -16,11 +16,11 @@ $this->title = 'Infortec';
 ?>
 <div class="site-index">
 
+    <img class="banner" src="<?= Url::to('@web/Imagens/banner/infortec') ?>">
+
     <ul class="nav nav-tabs">
-        <li class="active"><a href="<?= Url::toRoute("site/index")?>">Home</a></li>
-        <li class="active"><a href="<?= Url::toRoute("site/promocoes")?>">Menu 1</a></li>
-        <li class="active"><a href="<?= Url::toRoute("site/promocoes")?>">Menu 2</a></li>
-        <li class="active"><a href="<?= Url::toRoute("site/promocoes")?>">Menu 3</a></li>
+        <li class="active"><a href="<?= Url::toRoute("site/index")?>">Todos os Produtos</a></li>
+        <li><a href="<?= Url::toRoute("site/promocoes")?>">Promoções</a></li>
     </ul>
 
     <div class="allCards">

@@ -191,9 +191,8 @@ a.desc:after {
 }
 
 .product_descricao{
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 5%;
+    margin-left: 3%;
+    padding-top: 40% !important;
 }
 
 /*Fim da View Produtos*/
@@ -227,4 +226,14 @@ a.desc:after {
     color: #75a1ff;
 }
 
+.banner{
+    padding-bottom: 20px;
+    padding-top: 5px;
+    width: 100%;
+}
 
+#map {
+    width: 100%;
+    height: 400px;
+    background-color: grey;
+}

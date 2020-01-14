@@ -64,6 +64,8 @@
       <path value="$PROJECT_DIR$/infortec_site/vendor/symfony/dom-crawler" />
       <path value="$PROJECT_DIR$/infortec_site/vendor/symfony/css-selector" />
       <path value="$PROJECT_DIR$/infortec_site/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/infortec_site/vendor/facebook/webdriver" />
+      <path value="$PROJECT_DIR$/infortec_site/vendor/symfony/process" />
     </include_path>
   </component>
   <component name="PhpUnit">

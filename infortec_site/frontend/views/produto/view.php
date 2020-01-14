@@ -57,7 +57,7 @@ $this->title = $prod->nome;
         </div>
 
     </div>
-</div>
+
 <div class="img-viewProduto">
     <img class="card-img-top" src=<?= Url::to('@web/Imagens/') . $prod->fotoProduto ?> alt="No image">
     <div>
@@ -83,5 +83,5 @@ $this->title = $prod->nome;
     <p><?= $prod->descricao ?></p>
 </div>
 
-
+</div>
 

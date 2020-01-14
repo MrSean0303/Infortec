@@ -5,3 +5,9 @@ modules:
     enabled:
         - Yii2:
             part: fixtures
+            cleanup: false
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=infortecdb_test'
+            user: 'root'
+            password: ''
+            cleanup: false

@@ -92,13 +92,11 @@ class SiteController extends Controller
         return $this->render('index', ['prod' => $produtos]);
     }
 
-    public function actionPromocoes($nome)
+    public function actionPromocoes()
     {
-        var_dump($nome);
-        die();
         $produtos = Produto::find()->where(['>','valorDesconto', 0])->indexBy('idProduto')->all();
 
-        return $this->render('index', ['prod' => $produtos]);
+        return $this->render('indexPromocoes', ['prod' => $produtos]);
     }
 
     /**
