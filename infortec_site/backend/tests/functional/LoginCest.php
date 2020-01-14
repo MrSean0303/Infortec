@@ -4,6 +4,7 @@ namespace backend\tests\functional;
 
 use backend\tests\FunctionalTester;
 use common\fixtures\UserFixture;
+use yii;
 
 /**
  * Class LoginCest
@@ -37,8 +38,14 @@ class LoginCest
         $I->fillField('Password', 'password_0');
         $I->click('login-button');
 
-        $I->see('Logout (erau)', 'form button[type=submit]');
-        $I->dontSeeLink('Login');
-        $I->dontSeeLink('Signup');
+
+        /*$controllerl = Yii::$app->controller;
+        $homecheker = $controllerl->id.'/'.$controllerl->action->id;
+        var_dump($homecheker);
+        die();*/
+
+        $I->see('Logout (admin)', 'form button[type=submit]');
+        //$I->dontSeeLink('Login');
+        //$I->dontSeeLink('Signup');
     }
 }

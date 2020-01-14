@@ -10,33 +10,35 @@ class FavoritoCest
     // tests
     public function tryToTest(FunctionalTester $I)
     {
-        $I->amOnRoute('site/login');
-        $I->submitForm('#login-form', [
-            'Username' => 'admin',
-            'Password' => 'admin123'
-        ], 'login-button');
+        //Verificar se não a produtos adcionados.
+        $I->amOnRoute('favorito/index');
+        $I->See('Não tem produtos nos favoritos');
+
+        //login para efetuar a adição/remoção
+        $I->amOnPage('/site/login');
+        $I->fillField('Username', 'admin');
+        $I->fillField('Password', 'admin123');
+        $I->click('login-button');
+        $I->see('Logout (admin)', 'form button[type=submit]');
 
         //adicionar
-        $I->see('Logout (admin)');
         $I->click('Computador Desktop Gaming GML-DR32DC9');
         $I->see('Computador Desktop Gaming GML-DR32DC9');
         $I->click(' Adicionar aos Favoritos');
 
         //verificar se adicionou
         $I->amOnRoute('favorito/index');
+        $I->dontSee('Não tem produtos nos favoritos');
         $I->see('Computador Desktop Gaming GML-DR32DC9');
-        $I->see('Logout (admin)');
 
-        /*//apagar
-        $I->amOnRoute('site/index');
+
+        //apagar
         $I->click('Computador Desktop Gaming GML-DR32DC9');
         $I->see('Computador Desktop Gaming GML-DR32DC9');
-        $I->click('.product_favoritos_text');
+        $I->click(' Remover dos Favoritos');
 
         //verificar se apagou
         $I->amOnRoute('favorito/index');
-        $I->dontSee('Computador Desktop Gaming GML-DR32DC9');*/
-
-
+        $I->See('Não tem produtos nos favoritos');
     }
 }
