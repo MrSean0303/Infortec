@@ -14,7 +14,7 @@ $this->title = 'My Yii Application';
 
     <div class="seccao">
         <div class="selecao">
-            <h4>Gerir Vendas</h4>
+            <h4 style="font-weight: bold">Gerir Vendas</h4>
             <div class="cart">
                 <div class="item">
                     <?= Html::a('<span style="font-size: 500%; color: #2b20f5;"  class="glyphicon glyphicon-list-alt"></span><br>
@@ -28,7 +28,7 @@ $this->title = 'My Yii Application';
             </div>
         </div>
         <div class="selecao">
-            <h4>Gerir Produto</h4>
+            <h4 style="font-weight: bold">Gerir Produto</h4>
             <div class="cart">
                 <div class="item">
                     <?= Html::a('<span style="font-size: 500%; color: #2b20f5;" class="glyphicon glyphicon-eye-open"></span><br>
@@ -44,7 +44,7 @@ $this->title = 'My Yii Application';
 
     <div class="seccao">
         <div class="selecao">
-            <h4>Gerir Categorias</h4>
+            <h4 style="font-weight: bold">Gerir Categorias</h4>
             <div class="cart">
                 <div class="item">
                     <?= Html::a('<span style="font-size: 500%; color: #2b20f5;" class="glyphicon glyphicon-eye-open"></span><br>
@@ -57,7 +57,7 @@ $this->title = 'My Yii Application';
             </div>
         </div>
         <div class="selecao">
-            <h4>Gerir SubCategoria</h4>
+            <h4 style="font-weight: bold">Gerir SubCategoria</h4>
             <div class="cart">
                 <div class="item">
                     <?= Html::a('<span style="font-size: 500%; color: #2b20f5;" class="glyphicon glyphicon-eye-open"></span><br>
@@ -73,7 +73,7 @@ $this->title = 'My Yii Application';
 
     <div class="seccao">
         <div class="selecao">
-            <h4>Gerir Indicativos</h4>
+            <h4 style="font-weight: bold">Gerir Indicativos</h4>
             <div class="cart">
                 <div class="item">
                     <?= Html::a('<span style="font-size: 500%; color: #2b20f5;" class="glyphicon glyphicon-eye-open"></span><br>
@@ -86,7 +86,7 @@ $this->title = 'My Yii Application';
             </div>
         </div>
         <div class="selecao">
-            <h4>Gerir Utilizador</h4>
+            <h4 style="font-weight: bold">Gerir Utilizador</h4>
             <div class="cart">
                 <div class="item">
                     <?= Html::a('<span style="font-size: 500%; color: #2b20f5;"  class="glyphicon glyphicon-eye-open"></span><br>

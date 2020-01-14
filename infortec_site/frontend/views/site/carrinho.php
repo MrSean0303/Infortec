@@ -22,7 +22,7 @@ if ($compras != null) {
                 <th scope="col">Nome do produto</th>
                 <th scope="col">Preço</th>
                 <th scope="col">Quantidade</th>
-                <th scope="col">coiso</th>
+                <th scope="col">Preço Final</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -52,7 +52,7 @@ if ($compras != null) {
                 </tr>
             <?php }?>
            <tr>
-               <td scope="row" colspan="4" style="text-align: right"><h4>Total Ganho:</h4></td>
+               <td scope="row" colspan="4" style="text-align: right"><h4>Preço Total:</h4></td>
                <?= '<td style="text-align: right"><h4>'.number_format($total, 2,",",".").' € </h4></td>'?>
            </tr>
         </tbody>
