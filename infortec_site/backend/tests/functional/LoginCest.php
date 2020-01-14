@@ -27,16 +27,27 @@ class LoginCest
             ]
         ];
     }
-    
+
+    protected function formParams($login, $password)
+    {
+        return [
+            'LoginForm[username]' => $login,
+            'LoginForm[password]' => $password,
+        ];
+    }
+
     /**
      * @param FunctionalTester $I
      */
     public function loginUser(FunctionalTester $I)
     {
         $I->amOnPage('/site/login');
-        $I->fillField('Username', 'erau');
-        $I->fillField('Password', 'password_0');
-        $I->click('login-button');
+        $I->submitForm('#login-form', $this->formParams('erau', 'password_0'));
+        $I->see('Logout (erau)', 'form button[type=submit]');
+
+        //$I->see('Please fill out the following fields to login:');
+
+        //$I->click('login-button', 'form button[type=submit]');
 
 
         /*$controllerl = Yii::$app->controller;
@@ -44,7 +55,7 @@ class LoginCest
         var_dump($homecheker);
         die();*/
 
-        $I->see('Logout (admin)', 'form button[type=submit]');
+        //$I->see('Logout (erau)', 'form button[type=submit]');
         //$I->dontSeeLink('Login');
         //$I->dontSeeLink('Signup');
     }
