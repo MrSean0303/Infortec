@@ -48,7 +48,5 @@ class ProdutoCest
         $I->amOnPage('/produto/index');
         $I->see('Produtos');
         $I->see('Abc');
-
     }
-
 }
