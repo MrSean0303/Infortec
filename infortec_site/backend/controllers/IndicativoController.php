@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use app\models\ProdutoForm;
 use backend\models\IndicativoForm;
 use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use Yii;
@@ -132,7 +133,7 @@ class IndicativoController extends Controller
         $indicativo = $this->findModel($id);
 
         if ($indicativo->icon != null) {
-            $model = new ProdutoForm();
+            $model = new IndicativoForm();
             $model->icon = $indicativo->icon;
             $model->deleteImage();
         }
