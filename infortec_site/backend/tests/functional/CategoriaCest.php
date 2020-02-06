@@ -31,5 +31,7 @@ class CategoriaCest
         $I->click('Save');
 
         $I->see('Test');
+
+
     }
 }

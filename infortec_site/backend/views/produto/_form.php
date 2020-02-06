@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'subCategoria_id')->dropdownList(ArrayHelper::map($subcategoria, 'idsubCategoria', 'nome'),
         [
             'prompt' => 'Selecione...'
-        ])->label('Categoria')?>
+        ])->label('SubCategoria')?>
 
     <?= $form->field($model, 'iva_id')->dropdownList(ArrayHelper::map($iva, 'idIva', 'valorIva'),
         [

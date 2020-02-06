@@ -9,6 +9,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii;
+use function GuzzleHttp\Psr7\get_message_body_summary;
 
 
 /**
@@ -31,7 +32,13 @@ class FavoritoController extends \yii\rest\ActiveController
                 return null;
             }
         ];
-
+        $behaviors['verbs'] =[
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'Add' => 'POST',
+                'Remove' => 'DELETE',
+            ],
+        ];
 
         return $behaviors;
     }
@@ -67,6 +74,7 @@ class FavoritoController extends \yii\rest\ActiveController
             $fav = new Favorito();
             $fav->utilizador_id = \Yii::$app->user->id;
             $fav->produto_id = yii::$app->request->getBodyParam("idProduto");
+
             if ($fav->save()) {
                 return $fav;
             } else {
@@ -81,6 +89,8 @@ class FavoritoController extends \yii\rest\ActiveController
 
         $favExist = Favorito::find()->where( ['produto_id' => yii::$app->request->getBodyParam("idProduto"), 'utilizador_id' => yii::$app->user->id])->exists();
 
+        $filename = "C:/wamp64/www/Infortec/file.txt";
+        file_put_contents($filename, "data: " .yii::$app->request->getBodyParam("idProduto"));
         if ($favExist){
             $fav = Favorito::find()->where(['produto_id' => yii::$app->request->getBodyParam("idProduto"), 'utilizador_id' => Yii::$app->user->id])->one();
             $fav->delete();

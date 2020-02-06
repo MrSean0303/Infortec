@@ -147,13 +147,24 @@ class UserController extends \yii\rest\ActiveController
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
         $utilizador->numPontos = 0;
+        $user->status = 10;
 
         if ($user->save()){
             $utilizador->user_id = $user->id;
             if (!$utilizador->save()){
                 Throw new BadRequestHttpException("Erro na criação do Utilizador");
             }
-            return $user;
+            return [
+                'id' => $user->id,
+                'username' => $user->username,
+                'nome' => $utilizador->nome,
+                'email' => $user->email,
+                'status' => $user->status,
+                'role' => $user->role,
+                'nif' => $utilizador->nif,
+                'morada' => $utilizador->morada,
+                'numPontos' => $utilizador->numPontos
+            ];
         }else{
             Throw new BadRequestHttpException("Erro na criação do User");
         }
