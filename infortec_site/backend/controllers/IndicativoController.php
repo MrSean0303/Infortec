@@ -2,11 +2,14 @@
 
 namespace backend\controllers;
 
+use app\models\ProdutoForm;
 use backend\models\IndicativoForm;
+use common\models\User;
 use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use Yii;
 use common\models\Indicativo;
 use backend\models\IndicativoSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -22,10 +25,32 @@ class IndicativoController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['view', 'update', 'create', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->username);
+                        }
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -132,7 +157,7 @@ class IndicativoController extends Controller
         $indicativo = $this->findModel($id);
 
         if ($indicativo->icon != null) {
-            $model = new ProdutoForm();
+            $model = new IndicativoForm();
             $model->icon = $indicativo->icon;
             $model->deleteImage();
         }

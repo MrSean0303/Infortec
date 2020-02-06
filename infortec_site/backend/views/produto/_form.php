@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 
 <div class="produto-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'product-form']); ?>
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'subCategoria_id')->dropdownList(ArrayHelper::map($subcategoria, 'idsubCategoria', 'nome'),
         [
             'prompt' => 'Selecione...'
-        ])->label('Categoria')?>
+        ])->label('SubCategoria')?>
 
     <?= $form->field($model, 'iva_id')->dropdownList(ArrayHelper::map($iva, 'idIva', 'valorIva'),
         [

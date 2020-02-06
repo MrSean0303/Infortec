@@ -15,6 +15,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'username')->textInput() ?>
     <?= $form->field($model, 'email')->textInput() ?>
     <?= $form->field($model, 'status')->textInput() ?>
+    <p style="font-size: 12px; color: red;">(Role 0 - utilizador | Role 2 - administrador)</p>
     <?= $form->field($model, 'role')->textInput() ?>
 
     <div class="form-group">
